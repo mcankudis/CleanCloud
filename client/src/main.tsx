@@ -6,8 +6,8 @@ import "./scss/styles.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import { Impressum } from "./Impressum.tsx";
-import { Einstellungen } from "./Einstellungen.tsx";
+import { Contacts } from "./Contacts.tsx";
+import { Settings } from "./Settings.tsx";
 import HomePage from "./HomePage.tsx";
 
 const router = createBrowserRouter([
@@ -21,11 +21,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/Impressum",
-        element: <Impressum />,
+        element: <Contacts />,
       },
       {
-        path: "/Einstellungen",
-        element: <Einstellungen />,
+        path: "/Settings",
+        element: <Settings />,
       },
     ],
   },

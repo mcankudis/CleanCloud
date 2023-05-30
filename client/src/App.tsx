@@ -1,43 +1,62 @@
 import { useState } from "react";
 
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <nav className="navbar bg-body-tertiary">
-        <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">
-            <Link to={"/"}>CleanCloud</Link>
-          </span>
-          <Link to="/Einstellungen">Einstellungen</Link>
-          <div className="input-group flex-nowrap">
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              id="button-addon1"
-            >
-              Search for...
-            </button>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Servername"
-              aria-label="Servername"
-              aria-describedby="addon-wrapping"
-            />
+      <nav className="bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex-shrink-0">
+              CleanCloud
+              <a href="#" className="text-white text-xl font-bold">
+                Logo
+              </a>
+            </div>
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-4">
+                <a
+                  href="/"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Home
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  About
+                </a>
+                <a
+                  href="#"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Services
+                </a>
+                <a
+                  href="/Impressum"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Contact
+                </a>
+                <a
+                  href="/Settings"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Settings
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
+
       <div className="container">
         <Outlet />
       </div>
-
-      <footer>
-        <Link to="/Impressum">Impressum</Link>
-      </footer>
     </>
   );
 }
