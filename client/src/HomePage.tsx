@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './HomePage.css'
 
 function HomePage() {
   const [count, setCount] = useState(0);
