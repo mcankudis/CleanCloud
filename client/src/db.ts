@@ -1,4 +1,4 @@
-import { CloudFromAPI } from "./CloudFromAPI";
+import { CloudFromAPI } from "./shared/CloudFromAPI";
 
 class CloudList {
   private clouds: CloudFromAPI[];

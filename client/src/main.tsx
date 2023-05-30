@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import './scss/styles.scss';
+import "./scss/styles.scss";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  LoaderFunctionArgs,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
 import { Impressum } from "./Impressum.tsx";
@@ -29,21 +25,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/Einstellungen",
-        element: <Einstellungen/>,
-      }
-    ]
+        element: <Einstellungen />,
+      },
+    ],
   },
-  // {
-  //   path: "MemoPage/:memoId",
-  //   element: <MemoPage />,
-  //   loader: ({ params }: LoaderFunctionArgs) => {
-  //     for (let i = 0; i < memoList.length; i++) {
-  //       if (memoList[i].id == Number(params.memoId)) {
-  //         return memoList[i];
-  //       }
-  //     }
-  //   }
-  // }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
