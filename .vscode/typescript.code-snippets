@@ -1,0 +1,32 @@
+{
+    "Red console.log": {
+        "scope": "typescript, javascript",
+        "prefix": "log red",
+        "body": "console.log('\\x1b[31m%s\\x1b[0m', '$1', JSON.stringify($1, null, 4));"
+    },
+    "Green console.log": {
+        "scope": "typescript, javascript",
+        "prefix": "log green",
+        "body": "console.log('\\x1b[32m%s\\x1b[0m', '$1', JSON.stringify($1, null, 4));"
+    },
+    "Yellow console.log": {
+        "scope": "typescript, javascript",
+        "prefix": "log yellow",
+        "body": "console.log('\\x1b[33m%s\\x1b[0m', '$1', JSON.stringify($1, null, 4));"
+    },
+    "Blue console.log": {
+        "scope": "typescript, javascript",
+        "prefix": "log blue",
+        "body": "console.log('\\x1b[34m%s\\x1b[0m', '$1', JSON.stringify($1, null, 4));"
+    },
+    "Magenta console.log": {
+        "scope": "typescript, javascript",
+        "prefix": "log magenta",
+        "body": "console.log('\\x1b[35m%s\\x1b[0m', '$1', JSON.stringify($1, null, 4));"
+    },
+    "Cyan console.log": {
+        "scope": "typescript, javascript",
+        "prefix": "log cyan",
+        "body": "console.log('\\x1b[36m%s\\x1b[0m', '$1', JSON.stringify($1, null, 4));"
+    },
+}
