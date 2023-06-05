@@ -1,6 +1,6 @@
 import { LatLng } from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { SelectedLocation } from './SelectedLocation';
+import { SelectedLocation } from './location/SelectedLocation';
 
 export const Map = () => {
     const startLatLang = new LatLng(52.5, 13.4);

@@ -1,55 +1,19 @@
-import { LatLng } from 'leaflet';
-import { useEffect, useMemo, useState } from 'react';
 import { MdBolt } from 'react-icons/md';
-import { Estimate } from './Estimate';
-import { useSelectedLocation } from './useSelectedLocation';
-
-// todo move to config
-const BACKEND_URL = 'http://localhost:3545';
+import { Timeframe } from './TImeframe';
+import { useEstimate, useEstimateActions } from './estimate/useEstimate';
 
 export const DataCenterParameters = () => {
-    const { latLng } = useSelectedLocation();
+    const { estimate, input } = useEstimate();
+    const { setEnergyConsumption, setTimeframe } = useEstimateActions();
 
-    const [energyConsumption, setEnergyConsumption] = useState<number | undefined>(undefined);
-    const [estimateUnit, setEstimateUnit] = useState<Estimate | undefined>(undefined);
+    const ennergyConsumptionPresets = [100, 250, 500, 1000];
+    const timeframePresets: Timeframe[] = ['hour', 'day', 'week', 'month', 'year'];
 
-    const getEstimate = (estimateUnit?: Estimate, consumption?: number): Estimate | undefined => {
-        if (!consumption || !estimateUnit) return undefined;
-        return {
-            estimatedCarbonIntensity: estimateUnit.estimatedCarbonIntensity * consumption,
-            estimatedCostPerKWh: {
-                value: estimateUnit.estimatedCostPerKWh.value * consumption,
-                currency: estimateUnit.estimatedCostPerKWh.currency,
-            },
-            zone: estimateUnit.zone,
-        };
-    };
-
-    const fetchEstimate = async (latLng?: LatLng) => {
-        // todo alert/toast
-        if (!latLng) return;
-
-        // todo type this
-        const url = `${BACKEND_URL}/estimate?lat=${Math.round(latLng.lat)}&lng=${Math.round(
-            latLng.lng
-        )}`;
-        const response = await fetch(url);
-        const data = await response.json();
-
-        setEstimateUnit(data);
-    };
-
-    const estimate = useMemo(
-        () => getEstimate(estimateUnit, energyConsumption),
-        [estimateUnit, energyConsumption]
-    );
-
-    useEffect(() => {
-        fetchEstimate(latLng);
-    }, [latLng]);
+    const isInputSet = input?.projectedEnergyConsumption && input?.requestedTimeframe;
 
     return (
-        <div className="p-2">
+        <div className="p-2 text-left">
+            <div>Projected energy consumption:</div>
             <div className="flex items-center mt-2">
                 <MdBolt />
                 <input
@@ -58,49 +22,78 @@ export const DataCenterParameters = () => {
                     onChange={(e) => setEnergyConsumption(+e.target.value)}
                     placeholder="Expected avg. energy usage"
                     type="number"
-                    value={energyConsumption || ''}
+                    value={input?.projectedEnergyConsumption || ''}
                 />
                 <div>kW</div>
             </div>
+
             <div className="grid grid-cols-4 mt-2 gap-1">
-                <div
-                    className="rounded bg-zinc-700 aspect-video flex items-center justify-center cursor-pointer"
-                    onClick={() => setEnergyConsumption(100)}
-                >
-                    100 kW
-                </div>
-                <div
-                    className="rounded bg-zinc-700 aspect-video flex items-center justify-center cursor-pointer"
-                    onClick={() => setEnergyConsumption(250)}
-                >
-                    250 kW
-                </div>
-                <div
-                    className="rounded bg-zinc-700 aspect-video flex items-center justify-center cursor-pointer"
-                    onClick={() => setEnergyConsumption(500)}
-                >
-                    500 kW
-                </div>
-                <div
-                    className="rounded bg-zinc-700 aspect-video flex items-center justify-center cursor-pointer"
-                    onClick={() => setEnergyConsumption(1000)}
-                >
-                    1000 kW
-                </div>
+                {ennergyConsumptionPresets.map((preset) => (
+                    <div
+                        className={`transition-all duration-200 rounded aspect-video flex items-center justify-center cursor-pointer ${
+                            preset === input?.projectedEnergyConsumption
+                                ? 'bg-zinc-500'
+                                : 'bg-zinc-700'
+                        }`}
+                        key={preset}
+                        onClick={() => setEnergyConsumption(preset)}
+                    >
+                        {preset} kW
+                    </div>
+                ))}
             </div>
-            <div className="block text-left">
+
+            <div className="flex flex-col mt-2 gap-1 mb-2">
+                <div>Show estimates per:</div>
+                {timeframePresets.map((preset) => (
+                    <div
+                        className={`transition-all duration-200 rounded p-2 flex items-center justify-center cursor-pointer ${
+                            preset === input?.requestedTimeframe ? 'bg-zinc-500' : 'bg-zinc-700'
+                        }`}
+                        key={preset}
+                        onClick={() => setTimeframe(preset)}
+                    >
+                        {preset}
+                    </div>
+                ))}
+            </div>
+
+            {!!isInputSet && !estimate?.computed && <div>Loading...</div>}
+
+            {!!estimate?.computed && (
+                <div className="rounded bg-zinc-700 p-2">
+                    <h5>Estimates</h5>
+                    <div>
+                        Energy const per kWh: {estimate.base?.estimatedCostPerKWh.value}{' '}
+                        {estimate.base?.estimatedCostPerKWh.currency}
+                    </div>
+                    <div>
+                        C0<sub>2</sub> produced per kWh:{' '}
+                        {estimate.base?.estimatedCarbonIntensity?.toFixed(2)}g
+                    </div>
+                    <div>
+                        Total energy cost: {estimate.computed.totalCost.value}{' '}
+                        {estimate.computed.totalCost.currency}
+                    </div>
+                    <div>
+                        Total C0<sub>2</sub> produced: {estimate.computed.producedCarbon}g
+                    </div>
+                </div>
+            )}
+
+            {/* <div className="block text-left">
                 {latLng && <div>DEBUG: {latLng.toString()}</div>}
-                {estimateUnit && (
+                {estimate?.base && (
                     <div>
-                        ESTIMATE UNIT: <pre>{JSON.stringify(estimateUnit, null, 2)}</pre>
+                        ESTIMATE BASE: <pre>{JSON.stringify(estimate.base, null, 2)}</pre>
                     </div>
                 )}
-                {estimate && (
+                {estimate?.computed && (
                     <div>
-                        ESTIMATE: <pre>{JSON.stringify(estimate, null, 2)}</pre>
+                        ESTIMATE: <pre>{JSON.stringify(estimate.computed, null, 2)}</pre>
                     </div>
                 )}
-            </div>
+            </div> */}
         </div>
     );
 };

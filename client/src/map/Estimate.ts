@@ -6,3 +6,12 @@ export interface Estimate {
         value: number;
     };
 }
+
+export interface EstimateTotal {
+    zone: string;
+    producedCarbon: number;
+    totalCost: {
+        currency: string;
+        value: number;
+    };
+}
