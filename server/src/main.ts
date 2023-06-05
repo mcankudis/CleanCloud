@@ -16,6 +16,14 @@ async function bootstrap() {
     app.useLogger(logger);
 
     const configService = app.get(ConfigService);
+
+    logger.log(`Starting app with config`, {
+        environment: configService.get('environment'),
+        electricityMaps: configService.get('electricityMaps'),
+        db: configService.get('db'),
+        datadog: configService.get('datadog'),
+    });
+
     const port = configService.get('PORT') ?? 3545;
 
     await app.listen(port);

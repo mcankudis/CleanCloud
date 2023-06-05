@@ -8,9 +8,9 @@ export class DatadogLogger extends ConsoleLogger {
     private stage: string;
     constructor(private readonly config: ConfigService) {
         super();
-        this.stage = process.env.NODE_ENV ?? this.config?.get('ENVIRONMENT') ?? 'production';
+        this.stage = this.config.get('environment') ?? 'development';
 
-        const key = this.config?.get('DATADOG_APIKEY');
+        const key = this.config?.get('datadog.apiKey');
 
         const httpTransportOptions = {
             host: 'http-intake.logs.datadoghq.com',
@@ -27,36 +27,56 @@ export class DatadogLogger extends ConsoleLogger {
     }
 
     public log(message: any, ...optionalParams: any[]) {
+        const flowIdParam = optionalParams?.find((param) => param.flowId);
+        const flowId = flowIdParam?.flowId;
+        const restParams = optionalParams?.filter((param) => param !== flowIdParam);
+
         if (this.stage === 'production') {
-            this.Logger.info(message, optionalParams);
+            this.Logger.info(message, { flowId, ...restParams });
         }
         super.log(message, ...optionalParams);
     }
 
     public error(message: any, ...optionalParams: any[]) {
+        const flowIdParam = optionalParams?.find((param) => param.flowId);
+        const flowId = flowIdParam?.flowId;
+        const restParams = optionalParams?.filter((param) => param !== flowIdParam);
+
         if (this.stage === 'production') {
-            this.Logger.error(message, optionalParams);
+            this.Logger.error(message, { flowId, ...restParams });
         }
         super.error(message, ...optionalParams);
     }
 
     public warn(message: any, ...optionalParams: any[]) {
+        const flowIdParam = optionalParams?.find((param) => param.flowId);
+        const flowId = flowIdParam?.flowId;
+        const restParams = optionalParams?.filter((param) => param !== flowIdParam);
+
         if (this.stage === 'production') {
-            this.Logger.warn(message, optionalParams);
+            this.Logger.warn(message, { flowId, ...restParams });
         }
         super.warn(message, ...optionalParams);
     }
 
     public debug(message: any, ...optionalParams: any[]) {
+        const flowIdParam = optionalParams?.find((param) => param.flowId);
+        const flowId = flowIdParam?.flowId;
+        const restParams = optionalParams?.filter((param) => param !== flowIdParam);
+
         if (this.stage === 'production') {
-            this.Logger.debug(message, optionalParams);
+            this.Logger.debug(message, { flowId, ...restParams });
         }
         super.debug(message, ...optionalParams);
     }
 
     public verbose(message: any, ...optionalParams: any[]) {
+        const flowIdParam = optionalParams?.find((param) => param.flowId);
+        const flowId = flowIdParam?.flowId;
+        const restParams = optionalParams?.filter((param) => param !== flowIdParam);
+
         if (this.stage === 'production') {
-            this.Logger.verbose(message, optionalParams);
+            this.Logger.verbose(message, { flowId, ...restParams });
         }
         super.verbose(message, ...optionalParams);
     }
