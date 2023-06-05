@@ -1,15 +1,20 @@
 import { MdBolt } from 'react-icons/md';
+import { Loader } from '../components/Loader';
 import { Timeframe } from './TImeframe';
 import { useEstimate, useEstimateActions } from './estimate/useEstimate';
+import { useSelectedLocation } from './location/useSelectedLocation';
 
 export const DataCenterParameters = () => {
+    const { latLng } = useSelectedLocation();
     const { estimate, input } = useEstimate();
     const { setEnergyConsumption, setTimeframe } = useEstimateActions();
 
     const ennergyConsumptionPresets = [100, 250, 500, 1000];
     const timeframePresets: Timeframe[] = ['hour', 'day', 'week', 'month', 'year'];
 
+    // todo proper states
     const isInputSet = input?.projectedEnergyConsumption && input?.requestedTimeframe;
+    const isLoading = latLng && isInputSet && !estimate?.computed;
 
     return (
         <div className="p-2 text-left">
@@ -58,7 +63,10 @@ export const DataCenterParameters = () => {
                 ))}
             </div>
 
-            {!!isInputSet && !estimate?.computed && <div>Loading...</div>}
+            {!isInputSet && latLng && (
+                <div>Set energy consumption and timeframe to see estimates</div>
+            )}
+            {isLoading && <Loader color="#fff" />}
 
             {!!estimate?.computed && (
                 <div className="rounded bg-zinc-700 p-2">
