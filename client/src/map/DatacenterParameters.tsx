@@ -35,7 +35,7 @@ export const DataCenterParameters = () => {
             <div className="grid grid-cols-4 mt-2 gap-1">
                 {ennergyConsumptionPresets.map((preset) => (
                     <div
-                        className={`transition-all duration-200 rounded aspect-video flex items-center justify-center cursor-pointer ${
+                        className={`transition-all duration-200 rounded aspect-video flex items-center justify-center cursor-pointer hover:bg-zinc-600 ${
                             preset === input?.projectedEnergyConsumption
                                 ? 'bg-zinc-500'
                                 : 'bg-zinc-700'
@@ -52,7 +52,7 @@ export const DataCenterParameters = () => {
                 <div>Show estimates per:</div>
                 {timeframePresets.map((preset) => (
                     <div
-                        className={`transition-all duration-200 rounded p-2 flex items-center justify-center cursor-pointer ${
+                        className={`transition-all duration-200 rounded p-2 flex items-center justify-center cursor-pointer hover:bg-zinc-600 ${
                             preset === input?.requestedTimeframe ? 'bg-zinc-500' : 'bg-zinc-700'
                         }`}
                         key={preset}
