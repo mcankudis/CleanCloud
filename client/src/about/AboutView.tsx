@@ -5,7 +5,7 @@ export const AboutView = () => {
                 <h1>About</h1>
                 <a href="https://github.com/TeoDevGerman">Teoman Wiedenbeck</a>
                 <a href="https://github.com/mcankudis">Mikolaj Cankudis</a>
-                <p>...</p>
+                <a href ="https://github.com/joschjosch1"> Johanna Victoria Kaiser</a>
                 <p>...</p>
             </div>
         </div>
