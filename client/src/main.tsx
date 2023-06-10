@@ -8,6 +8,7 @@ import { MapView } from './map/MapView';
 import { SettingsView } from './settings/SettingsView';
 
 import './scss/styles.scss';
+import { GitHubView } from './github/GitHubView';
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: '/settings',
                 element: <SettingsView />,
+            },
+            {
+                path: '/github',
+                element: <GitHubView />,
             },
         ],
     },
