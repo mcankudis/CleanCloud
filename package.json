@@ -4,6 +4,7 @@
   "scripts": {
     "release": "release-it"
   },
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TeoDevGerman/CleanCloud.git"
