@@ -71,18 +71,25 @@ export const DataCenterParameters = () => {
             {!!estimate?.computed && (
                 <div className="rounded bg-zinc-700 p-2">
                     <h5>Estimates</h5>
-                    <div>
-                        Energy const per kWh: {estimate.base?.estimatedCostPerKWh.value}{' '}
-                        {estimate.base?.estimatedCostPerKWh.currency}
-                    </div>
+                    {estimate.base?.estimatedCostPerKWh.value === 0 ? (
+                        'No electricity price found'
+                    ) : (
+                        <div>
+                            Energy const per kWh: {estimate.base?.estimatedCostPerKWh.value}{' '}
+                            {estimate.base?.estimatedCostPerKWh.currency}
+                        </div>
+                    )}
+
                     <div>
                         C0<sub>2</sub> produced per kWh:{' '}
                         {estimate.base?.estimatedCarbonIntensity?.toFixed(2)}g
                     </div>
-                    <div>
-                        Total energy cost: {estimate.computed.totalCost.value}{' '}
-                        {estimate.computed.totalCost.currency}
-                    </div>
+                    {estimate.computed.totalCost.value > 0 && (
+                        <div>
+                            Total energy cost: {estimate.computed.totalCost.value}{' '}
+                            {estimate.computed.totalCost.currency}
+                        </div>
+                    )}
                     <div>
                         Total C0<sub>2</sub> produced: {estimate.computed.producedCarbon}g
                     </div>

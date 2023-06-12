@@ -9,6 +9,7 @@ import { Model } from 'mongoose';
 import { DatadogLogger } from '../logging/DatadogLogger';
 import { LatLngZoneDAO } from './schemas/LatLngZone.schema';
 import { ZoneDataDAO } from './schemas/ZoneData.schema';
+import { ZoneElectricityPriceDAO } from './schemas/ZoneElectricityPrice.schema';
 import { ElectricityMapsHistoryData } from './types/ElectricityMapsData';
 import { Estimate } from './types/Estimate';
 
@@ -19,6 +20,8 @@ export class EstimateService {
         private latLngZoneDAO: Model<LatLngZoneDAO>,
         @InjectModel(ZoneDataDAO.name)
         private readonly zoneDataDAO: Model<ZoneDataDAO>,
+        @InjectModel(ZoneElectricityPriceDAO.name)
+        private readonly zoneElectricityPriceDAO: Model<ZoneElectricityPriceDAO>,
         private readonly config: ConfigService,
         private readonly httpService: HttpService,
         private readonly logger: DatadogLogger,
@@ -37,11 +40,13 @@ export class EstimateService {
             longitudeRounded
         );
 
+        const electricityPrice = await this.getElectricityPrice(carbonEmissionsEstimate.zone);
+
         return {
             estimatedCarbonIntensity: carbonEmissionsEstimate.value,
             estimatedCostPerKWh: {
                 currency: 'EUR',
-                value: 0,
+                value: electricityPrice,
             },
             zone: carbonEmissionsEstimate.zone,
         };
@@ -91,6 +96,14 @@ export class EstimateService {
             value: averageCarbonIntensity,
             zone: latLngZone.zone,
         };
+    }
+
+    private async getElectricityPrice(zone: string): Promise<number> {
+        const priceInZone = await this.zoneElectricityPriceDAO.findOne({
+            zone: zone.substring(0, 2),
+        });
+        if (!priceInZone) return 0;
+        return priceInZone.kWhPriceInEuro;
     }
 
     private async getCarbonEmissionsEstimateFromElectricityMaps(
