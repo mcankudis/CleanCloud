@@ -1,0 +1,30 @@
+{
+  "name": "cleancloud",
+  "version": "0.0.0",
+  "scripts": {
+    "release": "release-it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeoDevGerman/CleanCloud.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeoDevGerman/CleanCloud/issues"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^5.1.1",
+    "release-it": "^15.11.0"
+  },
+  "homepage": "https://github.com/mcankudis/actions-test#readme",
+  "release-it": {
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "conventionalcommits",
+        "infile": "CHANGELOG.md"
+      }
+    }
+  }
+
+}
