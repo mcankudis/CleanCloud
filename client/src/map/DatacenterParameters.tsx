@@ -1,20 +1,18 @@
 import { MdBolt } from 'react-icons/md';
-import { Loader } from '../components/Loader';
 import { Timeframe } from './TImeframe';
+import { EstimateDisplay } from './estimate/EstimateDisplay';
 import { useEstimate, useEstimateActions } from './estimate/useEstimate';
 import { useSelectedLocation } from './location/useSelectedLocation';
 
 export const DataCenterParameters = () => {
     const { latLng } = useSelectedLocation();
-    const { estimate, input } = useEstimate();
+    const { input } = useEstimate();
     const { setEnergyConsumption, setTimeframe } = useEstimateActions();
 
     const ennergyConsumptionPresets = [100, 250, 500, 1000];
     const timeframePresets: Timeframe[] = ['hour', 'day', 'week', 'month', 'year'];
 
-    // todo proper states
     const isInputSet = input?.projectedEnergyConsumption && input?.requestedTimeframe;
-    const isLoading = latLng && isInputSet && !estimate?.computed;
 
     return (
         <div className="p-2 text-left">
@@ -66,35 +64,8 @@ export const DataCenterParameters = () => {
             {!isInputSet && latLng && (
                 <div>Set energy consumption and timeframe to see estimates</div>
             )}
-            {isLoading && <Loader color="#fff" />}
 
-            {!!estimate?.computed && (
-                <div className="rounded bg-zinc-700 p-2">
-                    <h5>Estimates</h5>
-                    {estimate.base?.estimatedCostPerKWh.value === 0 ? (
-                        'No electricity price found'
-                    ) : (
-                        <div>
-                            Energy const per kWh: {estimate.base?.estimatedCostPerKWh.value}{' '}
-                            {estimate.base?.estimatedCostPerKWh.currency}
-                        </div>
-                    )}
-
-                    <div>
-                        C0<sub>2</sub> produced per kWh:{' '}
-                        {estimate.base?.estimatedCarbonIntensity?.toFixed(2)}g
-                    </div>
-                    {estimate.computed.totalCost.value > 0 && (
-                        <div>
-                            Total energy cost: {estimate.computed.totalCost.value}{' '}
-                            {estimate.computed.totalCost.currency}
-                        </div>
-                    )}
-                    <div>
-                        Total C0<sub>2</sub> produced: {estimate.computed.producedCarbon}g
-                    </div>
-                </div>
-            )}
+            <EstimateDisplay />
 
             {/* <div className="block text-left">
                 {latLng && <div>DEBUG: {latLng.toString()}</div>}

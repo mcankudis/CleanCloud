@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Inject, Injectable, Scope } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, Scope } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
@@ -24,16 +24,16 @@ export class EstimateService {
         private readonly zoneElectricityPriceDAO: Model<ZoneElectricityPriceDAO>,
         private readonly config: ConfigService,
         private readonly httpService: HttpService,
-        private readonly logger: DatadogLogger,
+        private readonly Logger: DatadogLogger,
         @Inject(REQUEST)
         private readonly request: Request
     ) {}
     public async getEstimate(latitude: number, longitude: number): Promise<Estimate> {
-        this.logger.debug('Getting estimate', this.getMeta(), { latitude, longitude });
+        this.Logger.debug('Getting estimate', this.getMeta(), { latitude, longitude });
 
         const { latitudeRounded, longitudeRounded } = this.roundLatLng(latitude, longitude);
 
-        this.logger.debug('Rounded LatLng', this.getMeta(), { latitudeRounded, longitudeRounded });
+        this.Logger.debug('Rounded LatLng', this.getMeta(), { latitudeRounded, longitudeRounded });
 
         const carbonEmissionsEstimate = await this.getCarbonEmissionsEstimate(
             latitudeRounded,
@@ -56,11 +56,11 @@ export class EstimateService {
         latitude: number,
         longitude: number
     ): Promise<{ value: number; zone: string }> {
-        this.logger.debug('Getting carbon estimate', this.getMeta());
+        this.Logger.debug('Getting carbon estimate', this.getMeta());
 
         const latLngZone = await this.latLngZoneDAO.findOne({ latitude, longitude }).lean();
 
-        this.logger.debug(`Found zone: ${latLngZone?.zone}`, this.getMeta());
+        this.Logger.debug(`Found zone: ${latLngZone?.zone}`, this.getMeta());
 
         if (!latLngZone) {
             const data = await this.getCarbonEmissionsEstimateFromElectricityMaps(
@@ -68,7 +68,11 @@ export class EstimateService {
                 longitude
             );
 
-            if (!data) throw new Error('Could not get data');
+            if (!data)
+                throw new HttpException(
+                    'Could not find zone for coordinates',
+                    HttpStatus.NOT_FOUND
+                );
 
             await this.saveLatLngZoneMappingToDb(latitude, longitude, data.zone);
             await this.saveNewZoneDataToDb(data);
@@ -86,6 +90,9 @@ export class EstimateService {
             .sort({ datetime: -1 })
             .limit(100)
             .lean();
+
+        if (!zoneData.length)
+            throw new HttpException('Could not get zone data', HttpStatus.NOT_FOUND);
 
         // todo if data is older than x days (f.e. 3), also get new data from electricity maps
 
@@ -112,7 +119,7 @@ export class EstimateService {
     ): Promise<ElectricityMapsHistoryData> {
         const shouldMock = this.config.get('electricityMaps.shouldBeMocked');
 
-        this.logger.debug('Getting data from Electricity Maps', this.getMeta(), {
+        this.Logger.debug('Getting data from Electricity Maps', this.getMeta(), {
             latitude,
             longitude,
             shouldMock,
@@ -142,26 +149,28 @@ export class EstimateService {
             'X-BLOBR-KEY': this.config.get('ELECTRICITY_MAPS_APIKEY'),
         };
 
-        this.logger.debug('Calling Electricity Maps', this.getMeta(), { url, headers });
+        this.Logger.debug('Calling Electricity Maps', this.getMeta(), { url, headers });
 
-        const res = await this.httpService.axiosRef.get<ElectricityMapsHistoryData>(url, {
-            headers,
-        });
+        try {
+            const res = await this.httpService.axiosRef.get<ElectricityMapsHistoryData>(url, {
+                headers,
+            });
 
-        this.logger.debug('Got response from Electricity Maps', this.getMeta(), {
-            data: res.data,
-            status: res.status,
-            statusText: res.statusText,
-        });
+            this.Logger.debug('Got response from Electricity Maps', this.getMeta(), {
+                data: res.data,
+                status: res.status,
+                statusText: res.statusText,
+            });
 
-        if (res.status !== 200) {
-            this.logger.error('Failed to fetch data from ElectricityMaps');
-            throw new Error('Failed to fetch data from ElectricityMaps');
+            // todo validate response body
+            return res.data;
+        } catch (error) {
+            this.Logger.error('Failed to fetch data from ElectricityMaps');
+            throw new HttpException(
+                'Failed to fetch data from ElectricityMaps',
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
-
-        // todo validate response body
-
-        return res.data;
     }
 
     private async saveLatLngZoneMappingToDb(
@@ -169,7 +178,7 @@ export class EstimateService {
         longitude: number,
         zone: string
     ): Promise<void> {
-        this.logger.debug('Saving LatLngZone mapping to db', this.getMeta(), {
+        this.Logger.debug('Saving LatLngZone mapping to db', this.getMeta(), {
             latitude,
             longitude,
             zone,
@@ -183,7 +192,7 @@ export class EstimateService {
     }
 
     private async saveNewZoneDataToDb(data: ElectricityMapsHistoryData): Promise<void> {
-        this.logger.debug('Saving new zone data to db', this.getMeta(), { data });
+        this.Logger.debug('Saving new zone data to db', this.getMeta(), { data });
 
         const newestDataInDb = await this.zoneDataDAO
             .findOne({ zone: data.zone })
@@ -192,7 +201,7 @@ export class EstimateService {
             .lean();
 
         if (!newestDataInDb) {
-            this.logger.debug('No data in db yet, saving all data', this.getMeta(), { data });
+            this.Logger.debug('No data in db yet, saving all data', this.getMeta(), { data });
 
             const writeResult = await this.zoneDataDAO.bulkWrite(
                 data.history.map((historyData) => ({
@@ -202,9 +211,13 @@ export class EstimateService {
                 }))
             );
 
-            this.logger.debug('Write zoneData to db result', this.getMeta(), { writeResult });
+            this.Logger.debug('Write zoneData to db result', this.getMeta(), { writeResult });
 
-            if (!writeResult.isOk) throw new Error('Could not save new zone data to db');
+            if (!writeResult.isOk)
+                throw new HttpException(
+                    'Could not save new zone data to db',
+                    HttpStatus.INTERNAL_SERVER_ERROR
+                );
             return;
         }
 
@@ -215,11 +228,11 @@ export class EstimateService {
         );
 
         if (dataToSave.length === 0) {
-            this.logger.debug('No new data to save', this.getMeta());
+            this.Logger.debug('No new data to save', this.getMeta());
             return;
         }
 
-        this.logger.debug(
+        this.Logger.debug(
             `Saving ${dataToSave.length} out of ${data.history.length} new data points to db`,
             this.getMeta(),
             { dataToSave }
@@ -233,9 +246,13 @@ export class EstimateService {
             }))
         );
 
-        this.logger.debug('Write zoneData to db result', this.getMeta(), { writeResult });
+        this.Logger.debug('Write zoneData to db result', this.getMeta(), { writeResult });
 
-        if (!writeResult.isOk) throw new Error('Could not save new zone data to db');
+        if (!writeResult.isOk)
+            throw new HttpException(
+                'Could not save new zone data to db',
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
     }
 
     private roundLatLng(
