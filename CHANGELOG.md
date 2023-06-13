@@ -1,5 +1,12 @@
 
 
+## [0.2.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.1.0...0.2.0) (2023-06-13)
+
+
+### Features
+
+* improve error handling; extract estimate display to a separate component ([5d2824d](https://github.com/TeoDevGerman/CleanCloud/commit/5d2824dc1b0bb6af9d44f19da7c23c05e688ba3d))
+
 ## 0.1.0 (2023-06-13)
 
 
