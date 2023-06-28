@@ -1,5 +1,13 @@
 
 
+## [0.3.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.2.1...0.3.0) (2023-06-28)
+
+
+### Features
+
+* add saving selected datacenter locations via permalinks ([ab9cfb5](https://github.com/TeoDevGerman/CleanCloud/commit/ab9cfb5e43a8762571ed1e8bb7818fbfea25810c))
+* selecting multiple locations; saving selected locations; custom marker icons for different CO2 levels ([1adfd47](https://github.com/TeoDevGerman/CleanCloud/commit/1adfd475dd8a2d01b641e5a6b1a411d6f0be507f))
+
 ### [0.2.1](https://github.com/TeoDevGerman/CleanCloud/compare/0.2.0...0.2.1) (2023-06-28)
 
 ## [0.2.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.1.0...0.2.0) (2023-06-13)
