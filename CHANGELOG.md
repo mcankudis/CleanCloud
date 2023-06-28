@@ -1,5 +1,12 @@
 
 
+## [0.5.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.4.0...0.5.0) (2023-06-28)
+
+
+### Features
+
+* compute base estimate on backend side when fetching a save ([56e6a30](https://github.com/TeoDevGerman/CleanCloud/commit/56e6a3028bda8c022be3d36e734715a332064fbf))
+
 ## [0.4.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.3.0...0.4.0) (2023-06-28)
 
 
