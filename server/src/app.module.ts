@@ -1,6 +1,7 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
 
 import { configuration } from './config/configuration';
 import { EstimateModule } from './estimate/Estimate.module';
@@ -24,6 +25,7 @@ import { DatacenterSaveModule } from './save/DatacenterSave.module';
             },
             inject: [ConfigService],
         }),
+        ScheduleModule.forRoot(),
         EstimateModule,
         DatacenterSaveModule,
         LoggerModule,

@@ -1,5 +1,6 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { randomUUID } from 'crypto';
 import { Model } from 'mongoose';
 
@@ -16,7 +17,7 @@ const getRandomString = () => {
     return randomUUID();
 };
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class DatacenterSaveService {
     constructor(
         @InjectModel(DatacenterSaveDAO.name)
@@ -74,5 +75,13 @@ export class DatacenterSaveService {
         return res;
     }
 
-    // todo cronjob for cleaning up old saves
+    @Cron(CronExpression.EVERY_DAY_AT_NOON)
+    public async cleanupOldSaves() {
+        this.Logger.debug('Deleting old saves');
+
+        const date30daysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+        const res = await this.datacenterSaveDAO.deleteMany({ lastAccess: { $lt: date30daysAgo } });
+
+        this.Logger.debug('Deleted old saves', res);
+    }
 }
