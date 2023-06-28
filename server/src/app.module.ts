@@ -7,6 +7,7 @@ import { EstimateModule } from './estimate/Estimate.module';
 import { FlowIdMiddleware } from './logging/flow-id.middleware';
 import { LoggerModule } from './logging/logger.module';
 import { RequestLoggerMiddleware } from './logging/request-logger.middleware';
+import { DatacenterSaveModule } from './save/DatacenterSave.module';
 
 @Module({
     imports: [
@@ -24,6 +25,7 @@ import { RequestLoggerMiddleware } from './logging/request-logger.middleware';
             inject: [ConfigService],
         }),
         EstimateModule,
+        DatacenterSaveModule,
         LoggerModule,
     ],
 })
