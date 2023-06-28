@@ -23,20 +23,20 @@ export class DatacenterSaveService {
         private datacenterSaveDAO: Model<DatacenterSaveDAO>,
         private readonly Logger: DatadogLogger
     ) {}
-    // todo logging
-    // todo validation
 
     public async getDatacenterSaveById(id: string): Promise<DatacenterSaveFindResponse | null> {
         const save = await this.datacenterSaveDAO.findOne({ id });
 
+        this.Logger.debug(`Save ${id} requested, found in db: ${save?._id}`);
+
         if (save) {
+            this.Logger.debug(`Updating lastAccess on save ${id}`);
+
             save.lastAccess = new Date();
             await save.save();
+
+            this.Logger.debug(`Updated lastAccess on save ${id}`);
         }
-
-        // todo update lastAccess
-
-        // todo ask for password if password-protected
 
         return save;
     }
@@ -44,36 +44,34 @@ export class DatacenterSaveService {
     public async createDatacenterSave(
         datacenterSave: DatacenterSaveCreateRequest
     ): Promise<DatacenterSave> {
-        this.Logger.debug('Creating DatacenterSave', {
-            ...datacenterSave,
-            password: datacenterSave.password ? '*****' : undefined,
-        });
-
-        const passwordHash = datacenterSave.password; // todo encrypt
+        this.Logger.debug('Creating DatacenterSave', datacenterSave);
 
         const data: DatacenterSave = {
             id: getRandomString(),
             lastAccess: new Date(),
             positions: datacenterSave.positions,
-            password: passwordHash,
         };
+
         const res = await this.datacenterSaveDAO.create(data);
+
+        this.Logger.debug(`Created save`, res);
 
         return res;
     }
 
     public async updateDatacenterSave(update: DatacenterSaveUpdateRequest) {
+        this.Logger.debug('Updating DatacenterSave', update);
+
         const save = await this.datacenterSaveDAO.findOne({ id: update.id });
-        // todo check password if needed
 
         if (!save) return null;
 
         save.positions = update.positions;
-        // todo update password
+        const res = await save.save();
 
-        save.save();
+        this.Logger.debug('Updated DatacenterSave', res);
 
-        return save;
+        return res;
     }
 
     // todo cronjob for cleaning up old saves

@@ -10,7 +10,7 @@ export const App = () => {
                             <img className="max-h-16" src="/logo.png" alt="Clean Cloud Logo" />
                         </Link>
                         <div className="hidden md:block">
-                            <div className="ml-10 flex items-baseline space-x-4">
+                            <div className="ml-10 flex items-center space-x-4">
                                 <Link
                                     to="/"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -24,16 +24,14 @@ export const App = () => {
                                     About
                                 </Link>
                                 <Link
-                                    to="/settings"
+                                    to="https://github.com/TeoDevGerman/CleanCloud"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
-                                    Settings
-                                </Link>
-                                <Link
-                                    to="/github"
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                                >
-                                    GitHub
+                                    <img
+                                        src="/github-mark-white.png"
+                                        alt="Our GitHub"
+                                        width="24px"
+                                    />
                                 </Link>
                             </div>
                         </div>

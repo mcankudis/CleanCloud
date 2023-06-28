@@ -1,3 +1,5 @@
+import { AsyncDataState } from '../AsyncDataState';
+
 export interface Estimate {
     zone: string;
     estimatedCarbonIntensity: number;
@@ -15,3 +17,5 @@ export interface EstimateTotal {
         value: number;
     };
 }
+
+export type EstimateState = AsyncDataState<Estimate>;

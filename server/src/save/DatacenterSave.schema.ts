@@ -4,12 +4,10 @@ import { DatacenterSave } from './DatacenterSave';
 
 export type DatacenterSaveDocument = HydratedDocument<DatacenterSave>;
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, collection: 'Saves' })
 export class DatacenterSaveDAO implements DatacenterSave {
     @Prop({ index: true })
     id: string;
-    @Prop()
-    password?: string;
     @Prop({ type: Array })
     positions: { latitude: number; longitude: number }[];
     @Prop()

@@ -19,7 +19,7 @@ import { DatacenterSaveService } from './DatacenterSave.service';
 export class DatacenterSaveController {
     constructor(private readonly datacenterSaveService: DatacenterSaveService) {}
 
-    @Get('/:id')
+    @Get(':id')
     async getSave(@Param('id') id: string): Promise<DatacenterSaveFindResponse> {
         const datacenter = await this.datacenterSaveService.getDatacenterSaveById(id);
         if (!datacenter) throw new HttpException('Cannot find save', HttpStatus.NOT_FOUND);
@@ -29,7 +29,7 @@ export class DatacenterSaveController {
         };
     }
 
-    @Post('')
+    @Post()
     // todo validation
     async createDatacenterSave(
         @Body() save: DatacenterSaveCreateRequest
@@ -42,7 +42,7 @@ export class DatacenterSaveController {
         };
     }
 
-    @Patch('')
+    @Patch()
     // todo validation
     async updateDatacenterSave(
         @Body() update: DatacenterSaveUpdateRequest

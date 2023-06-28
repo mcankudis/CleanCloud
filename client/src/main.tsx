@@ -5,10 +5,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { AboutView } from './about/AboutView';
 import { MapView } from './map/MapView';
-import { SettingsView } from './settings/SettingsView';
 
 import './scss/styles.scss';
-import { GitHubView } from './github/GitHubView';
 
 const router = createBrowserRouter([
     {
@@ -20,16 +18,12 @@ const router = createBrowserRouter([
                 element: <MapView />,
             },
             {
+                path: '/:id',
+                element: <MapView />,
+            },
+            {
                 path: '/about',
                 element: <AboutView />,
-            },
-            {
-                path: '/settings',
-                element: <SettingsView />,
-            },
-            {
-                path: '/github',
-                element: <GitHubView />,
             },
         ],
     },
