@@ -1,5 +1,12 @@
 
 
+## [0.4.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.3.0...0.4.0) (2023-06-28)
+
+
+### Features
+
+* add cronjob for removing old saves ([7efb7a3](https://github.com/TeoDevGerman/CleanCloud/commit/7efb7a3ba5717d45faaacd2a17a2b2cb58179663))
+
 ## [0.3.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.2.1...0.3.0) (2023-06-28)
 
 
