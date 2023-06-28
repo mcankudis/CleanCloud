@@ -65,7 +65,6 @@ const isRequestWithBody = (arg: HttpRequestOptions): arg is BodyRequestOptions =
 // of the data, as it is a good practice when working with DTOs. Here, you should provide the expected response type
 // and wrap this function in a mapper that will map the response to the internal type
 
-// TODO: make sure 'content-type' header is set even when custom headers are passed
 class HttpService {
     public async fetch<T>(
         url: string,

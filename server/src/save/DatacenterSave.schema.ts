@@ -9,7 +9,12 @@ export class DatacenterSaveDAO implements DatacenterSave {
     @Prop({ index: true })
     id: string;
     @Prop({ type: Array })
-    positions: { latitude: number; longitude: number }[];
+    positions: {
+        name?: string;
+        latitude: number;
+        longitude: number;
+        projectedEnergyConsumptionInKWh?: number;
+    }[];
     @Prop()
     lastAccess: Date;
     @Prop()

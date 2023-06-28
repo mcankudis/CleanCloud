@@ -24,5 +24,6 @@ import {
     ],
     controllers: [EstimateController],
     providers: [EstimateService],
+    exports: [EstimateService],
 })
 export class EstimateModule {}

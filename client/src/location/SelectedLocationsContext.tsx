@@ -1,7 +1,7 @@
 import { LatLng } from 'leaflet';
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
 import { EstimateState } from '../estimate/Estimate';
-import { fetchEstimate, getEstimate } from '../estimate/EstimateUtils';
+import { getEstimate } from '../estimate/EstimateUtils';
 import { Save, SavePosition } from '../save/Save';
 import { useSave } from '../save/useSave';
 import { useTimeframe } from '../timeframe/useTimeframe';
@@ -15,13 +15,6 @@ export const SelectedLocationsContext = createContext<SelectedLocationsContext |
     undefined
 );
 
-const fetchEstimateWrapper = async (coordinates: LatLng): Promise<EstimateState> => {
-    const estimate = await fetchEstimate(coordinates);
-
-    if (estimate.success) return { type: 'DATA', data: estimate.data };
-    return { type: 'ERROR', message: estimate.errorMessage };
-};
-
 export const SelectedLocationActionsContext = createContext<
     Dispatch<SetStateAction<DatacenterLocation[]>> | undefined
 >(undefined);
@@ -31,8 +24,12 @@ const mapLocationsFromSaveToDatacenterLocations = async (
 ): Promise<DatacenterLocation[]> => {
     const promises = positions.map(async (position) => {
         const latLng = new LatLng(position.latitude, position.longitude);
+        const estimateState: EstimateState = position.baseEstimate
+            ? { type: 'DATA', data: position.baseEstimate }
+            : { type: 'ERROR', message: 'Failed to fetch data' };
+
         return {
-            baseEstimate: await fetchEstimateWrapper(latLng),
+            baseEstimate: estimateState,
             coordinates: latLng,
             projectedEnergyConsumptionInKWh: position.projectedEnergyConsumptionInKWh,
         };

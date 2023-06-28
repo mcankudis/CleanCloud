@@ -94,8 +94,6 @@ export class EstimateService {
         if (!zoneData.length)
             throw new HttpException('Could not get zone data', HttpStatus.NOT_FOUND);
 
-        // todo if data is older than x days (f.e. 3), also get new data from electricity maps
-
         const averageCarbonIntensity =
             zoneData.reduce((acc, curr) => acc + curr.carbonIntensity, 0) / zoneData.length;
 

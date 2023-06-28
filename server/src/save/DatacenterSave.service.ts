@@ -1,14 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { randomUUID } from 'crypto';
 import { Model } from 'mongoose';
 
+import { EstimateService } from 'src/estimate/Estimate.service';
 import { DatadogLogger } from '../logging/DatadogLogger';
 import {
     DatacenterSave,
     DatacenterSaveCreateRequest,
     DatacenterSaveFindResponse,
+    DatacenterSavePositionResponse,
     DatacenterSaveUpdateRequest,
 } from './DatacenterSave';
 import { DatacenterSaveDAO } from './DatacenterSave.schema';
@@ -21,7 +23,8 @@ const getRandomString = () => {
 export class DatacenterSaveService {
     constructor(
         @InjectModel(DatacenterSaveDAO.name)
-        private datacenterSaveDAO: Model<DatacenterSaveDAO>,
+        private readonly datacenterSaveDAO: Model<DatacenterSaveDAO>,
+        private readonly estimateService: EstimateService,
         private readonly Logger: DatadogLogger
     ) {}
 
@@ -29,6 +32,37 @@ export class DatacenterSaveService {
         const save = await this.datacenterSaveDAO.findOne({ id });
 
         this.Logger.debug(`Save ${id} requested, found in db: ${save?._id}`);
+
+        if (!save) throw new HttpException('Save not found', HttpStatus.NOT_FOUND);
+
+        const promises: Promise<DatacenterSavePositionResponse>[] = save.positions.map(
+            async (position) => {
+                let estimate;
+                try {
+                    estimate = await this.estimateService
+                        .getEstimate(position.latitude, position.longitude)
+                        .catch();
+                } catch (error) {
+                    this.Logger.error(
+                        `Error fetching estimate for (${position.latitude}, ${position.longitude})`,
+                        error
+                    );
+                    estimate = undefined;
+                }
+
+                return {
+                    latitude: position.latitude,
+                    longitude: position.longitude,
+                    name: position.name,
+                    baseEstimate: estimate,
+                    projectedEnergyConsumptionInKWh: position.projectedEnergyConsumptionInKWh,
+                };
+            }
+        );
+
+        this.Logger.debug('Enriched postions with estimates');
+
+        const positions = await Promise.all(promises);
 
         if (save) {
             this.Logger.debug(`Updating lastAccess on save ${id}`);
@@ -39,7 +73,7 @@ export class DatacenterSaveService {
             this.Logger.debug(`Updated lastAccess on save ${id}`);
         }
 
-        return save;
+        return { ...save, positions };
     }
 
     public async createDatacenterSave(

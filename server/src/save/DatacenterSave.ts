@@ -1,6 +1,17 @@
+import { Estimate } from 'src/estimate/types/Estimate';
+
+export interface DatacenterSavePosition {
+    name?: string;
+    latitude: number;
+    longitude: number;
+    projectedEnergyConsumptionInKWh?: number;
+}
+
+export type DatacenterSavePositionResponse = DatacenterSavePosition & { baseEstimate?: Estimate };
+
 export interface DatacenterSave {
     id: string;
-    positions: { latitude: number; longitude: number }[];
+    positions: DatacenterSavePosition[];
     lastAccess: Date;
 }
 

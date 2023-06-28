@@ -1,7 +1,10 @@
+import { Estimate } from '../estimate/Estimate';
+
 export interface SavePosition {
     latitude: number;
     longitude: number;
     projectedEnergyConsumptionInKWh?: number;
+    baseEstimate?: Estimate;
 }
 
 export interface Save {
