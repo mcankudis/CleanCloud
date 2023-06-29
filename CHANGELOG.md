@@ -1,5 +1,12 @@
 
 
+## [0.6.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.5.2...0.6.0) (2023-06-29)
+
+
+### Features
+
+* add memberslist to about-view ([c6eaafc](https://github.com/TeoDevGerman/CleanCloud/commit/c6eaafcbfc624a05d4c55cf368f446cbed1f329c))
+
 ### [0.5.2](https://github.com/TeoDevGerman/CleanCloud/compare/0.5.1...0.5.2) (2023-06-29)
 
 ### [0.5.1](https://github.com/TeoDevGerman/CleanCloud/compare/0.5.0...0.5.1) (2023-06-29)
