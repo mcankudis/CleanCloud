@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2022-01-01 00:00:00,USA,Duke Energy Florida Inc,US-FLA-FPC,425.56,533.24,6.40,3.82,eia.gov; Electricity Maps Estimation

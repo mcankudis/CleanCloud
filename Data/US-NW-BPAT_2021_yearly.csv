@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,USA,Bonneville Power Administration,US-NW-BPAT,64.16,94.65,89.06,81.56,eia.gov; Electricity Maps Estimation

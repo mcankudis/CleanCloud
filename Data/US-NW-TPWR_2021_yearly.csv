@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,USA,"City Of Tacoma, Department Of Public Utilities, Light Division",US-NW-TPWR,36.74,64.30,93.74,89.49,eia.gov
