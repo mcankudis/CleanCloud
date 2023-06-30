@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,USA,Duke Energy Progress East,US-CAR-CPLE,256.57,316.57,56.54,8.73,eia.gov; Electricity Maps Estimation

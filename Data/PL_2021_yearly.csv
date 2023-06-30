@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,Poland,Poland,PL,772.07,857.00,19.74,18.10,entsoe.eu

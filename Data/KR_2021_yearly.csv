@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,South Korea,South Korea,KR,424.93,490.50,30.47,4.37,Electricity Maps Estimation

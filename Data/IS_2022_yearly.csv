@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2022-01-01 00:00:00,Iceland,Iceland,IS,0.05,27.50,99.99,99.99,amper.landsnet.is; Electricity Maps Estimation

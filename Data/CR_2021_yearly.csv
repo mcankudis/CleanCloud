@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,Costa Rica,Costa Rica,CR,16.23,40.29,97.19,97.19,Electricity Maps Estimation; grupoice.com

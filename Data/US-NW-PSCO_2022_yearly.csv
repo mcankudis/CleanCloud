@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2022-01-01 00:00:00,USA,Public Service Company Of Colorado,US-NW-PSCO,509.74,559.72,38.03,37.95,eia.gov; Electricity Maps Estimation

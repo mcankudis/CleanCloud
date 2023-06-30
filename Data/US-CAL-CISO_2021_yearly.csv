@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,USA,California Independent System Operator,US-CAL-CISO,213.96,280.15,53.34,42.03,Electricity Maps Estimation; caiso.com

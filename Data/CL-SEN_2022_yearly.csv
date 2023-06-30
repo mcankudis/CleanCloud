@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2022-01-01 00:00:00,Chile,Sistema Eléctrico Nacional,CL-SEN,165.40,210.22,53.01,53.01,Electricity Maps Estimation; coordinador.cl

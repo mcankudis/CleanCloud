@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2022-01-01 00:00:00,Norway,Southeast Norway,NO-NO1,5.93,30.21,99.05,93.22,entsoe.eu; Electricity Maps Estimation

@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,USA,Iso New England Inc.,US-NE-ISNE,194.35,281.25,51.73,27.54,Electricity Maps Estimation; iso-ne.com

@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2022-01-01 00:00:00,USA,Jacksonville Electric Authority,US-FLA-JEA,624.34,674.73,7.98,1.99,eia.gov; Electricity Maps Estimation

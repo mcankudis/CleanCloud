@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,Sweden,North Central Sweden,SE-SE2,0.58,17.43,99.81,99.80,entsoe.eu; Electricity Maps Estimation

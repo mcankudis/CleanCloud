@@ -1,0 +1,2 @@
+Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
+2021-01-01 00:00:00,USA,Tampa Electric Company,US-FLA-TEC,510.62,593.92,5.50,5.18,eia.gov; Electricity Maps Estimation
