@@ -1,6 +1,6 @@
 {
   "name": "cleancloud",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "scripts": {
     "release": "release-it"
   },

@@ -1,5 +1,7 @@
 
 
+### [0.6.1](https://github.com/TeoDevGerman/CleanCloud/compare/0.6.0...0.6.1) (2023-06-30)
+
 ## [0.6.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.5.2...0.6.0) (2023-06-29)
 
 
