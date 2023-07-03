@@ -1,9 +1,10 @@
-import { Loader } from './components/Loader';
-import { DatacenterLocation } from './location/DatacenterLocation';
-import { useSelectedLocations } from './location/useSelectedLocation';
-import { useSave, useSaveActions } from './save/useSave';
-import { Timeframe } from './timeframe/Timeframe';
-import { useTimeframe, useTimeframeActions } from './timeframe/useTimeframe';
+import { Loader } from '../components/Loader';
+import { DatacenterLocation } from '../location/DatacenterLocation';
+import { useSelectedLocations } from '../location/useSelectedLocation';
+import { useSave, useSaveActions } from '../save/useSave';
+import { Timeframe } from '../timeframe/Timeframe';
+import { useTimeframe, useTimeframeActions } from '../timeframe/useTimeframe';
+import { DatacentersList } from './DatacentersList';
 
 const getBaseEstimateDisplay = (location: DatacenterLocation) => {
     if (!location.baseEstimate) return 'TODO: no base estimate';
@@ -29,7 +30,7 @@ const copySaveLinkToClipboard = (saveId: string) => {
     // todo toast
 };
 
-export const DataCenterParameters = () => {
+export const Sidebar = () => {
     const { locations } = useSelectedLocations();
     const { timeframe } = useTimeframe();
     const { setTimeframe } = useTimeframeActions();
@@ -41,8 +42,20 @@ export const DataCenterParameters = () => {
     const onSave = () => (save ? updateSave(save.id, locations) : createNewSave(locations));
 
     return (
-        <div className="p-2 text-left">
-            <div className="flex flex-col mt-2 gap-1 mb-2">
+        <div className="p-2 main-layout">
+            <div>
+                {save && (
+                    <button
+                        className="bg-green-700 mb-2"
+                        title="Copy link to saved datacenters to clipboard"
+                        onClick={() => copySaveLinkToClipboard(save.id)}
+                    >
+                        Copy link to saved datacenters to clipboard
+                    </button>
+                )}
+            </div>
+
+            {/* <div className="flex flex-col mt-2 gap-1 mb-2">
                 <div>Show estimates for:</div>
 
                 {timeframePresets.map((preset) => (
@@ -56,32 +69,15 @@ export const DataCenterParameters = () => {
                         {preset}
                     </div>
                 ))}
+            </div> */}
+            <div className="flex justify-center overflow-auto">
+                <div className="row justify-center overflow-auto">
+                    <button className="bg-green-700" onClick={onSave}>
+                        Save datacenters
+                    </button>
+                    <DatacentersList />
+                </div>
             </div>
-
-            <div>TODO proper datacenters list here</div>
-
-            <div>
-                {locations.map((location) => (
-                    <div className="p-1" key={location.coordinates.toString()}>
-                        {location.coordinates.lat.toFixed(2)}, {location.coordinates.lng.toFixed(2)}{' '}
-                        | {getBaseEstimateDisplay(location)}
-                    </div>
-                ))}
-            </div>
-
-            {save && (
-                <button
-                    className="bg-green-700 mb-2"
-                    title="Copy link to saved datacenters to clipboard"
-                    onClick={() => copySaveLinkToClipboard(save.id)}
-                >
-                    Copy link to saved datacenters to clipboard
-                </button>
-            )}
-
-            <button className="bg-green-700" onClick={onSave}>
-                Save datacenters
-            </button>
         </div>
     );
 };
