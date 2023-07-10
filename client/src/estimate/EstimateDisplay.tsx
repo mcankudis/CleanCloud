@@ -1,12 +1,7 @@
 import { useSelectedLocations } from '../location/useSelectedLocation';
-
-interface TotalEstimate {
-    baseCarbonIntensity: number;
-    computed: {
-        totalCost: { [key in string]: number };
-        producedCarbon: number;
-    };
-}
+import { TimeframeSelect } from '../timeframe/TimeframeSelect';
+import { TotalEstimate } from './Estimate';
+import { getEstimateForDisplay } from './EstimateUtils';
 
 export const EstimateDisplay = () => {
     const { locations } = useSelectedLocations();
@@ -40,32 +35,13 @@ export const EstimateDisplay = () => {
         }
     );
 
-    if (estimate.baseCarbonIntensity === 0) return null;
-
     return (
-        <>
-            {!!estimate?.computed && (
-                <div
-                    className="absolute top-4 left-20 rounded bg-zinc-700 p-5 opacity-90"
-                    style={{ zIndex: 999 }}
-                >
-                    <h5>Estimates</h5>
-
-                    <div>
-                        C0<sub>2</sub> produced per kWh: {estimate.baseCarbonIntensity.toFixed(2)}g
-                    </div>
-
-                    {Object.entries(estimate.computed.totalCost).map(([currency, value]) => (
-                        <div key={currency}>
-                            Total energy cost: {value.toFixed(2)} {currency}
-                        </div>
-                    ))}
-                    <div>
-                        Total C0<sub>2</sub> produced: {estimate.computed.producedCarbon.toFixed(2)}
-                        g
-                    </div>
-                </div>
-            )}
-        </>
+        <div
+            className="absolute top-4 right-4 rounded bg-zinc-700 p-5 opacity-90"
+            style={{ zIndex: 999 }}
+        >
+            <TimeframeSelect />
+            {getEstimateForDisplay(estimate)}
+        </div>
     );
 };
