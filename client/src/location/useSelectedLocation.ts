@@ -60,8 +60,13 @@ export const useSelectedLocationsActions = () => {
         });
     };
 
+    const clearAllLocations = () => {
+        setSelectedLocations([]);
+    };
+
     return {
         addLocation,
+        clearAllLocations,
         removeLocation,
         updateLocationConsumption,
     };

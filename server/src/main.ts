@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
 import { DatadogLogger } from './logging/DatadogLogger';
@@ -23,6 +24,8 @@ async function bootstrap() {
         db: configService.get('db'),
         datadog: configService.get('datadog'),
     });
+
+    app.useGlobalPipes(new ValidationPipe());
 
     const port = configService.get('PORT') ?? 3545;
 

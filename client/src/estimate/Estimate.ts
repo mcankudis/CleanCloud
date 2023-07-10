@@ -18,4 +18,12 @@ export interface EstimateTotal {
     };
 }
 
+export interface TotalEstimate {
+    baseCarbonIntensity: number;
+    computed: {
+        totalCost: { [key in string]: number };
+        producedCarbon: number;
+    };
+}
+
 export type EstimateState = AsyncDataState<Estimate>;

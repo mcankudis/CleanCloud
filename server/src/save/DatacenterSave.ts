@@ -1,4 +1,4 @@
-import { Estimate } from 'src/estimate/types/Estimate';
+import { Estimate } from '../estimate/types/Estimate';
 
 export interface DatacenterSavePosition {
     name?: string;
@@ -15,7 +15,6 @@ export interface DatacenterSave {
     lastAccess: Date;
 }
 
-// todo validation
 export type DatacenterSaveCreateRequest = Pick<DatacenterSave, 'positions'>;
 export type DatacenterSaveUpdateRequest = Pick<DatacenterSave, 'id' | 'positions'>;
 export type DatacenterSaveFindResponse = Pick<DatacenterSave, 'id' | 'positions'>;
