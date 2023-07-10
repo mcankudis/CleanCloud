@@ -32,7 +32,11 @@ export const useSaveActions = () => {
         });
 
         if (res.success) {
+            // todo toast
             setSave(res.data);
+            const link = `${window.location.origin}/${res.data.id}`;
+            window.history.replaceState(null, 'Clean Cloud', `/${res.data.id}`);
+            window.navigator.clipboard.writeText(link);
         }
 
         // todo error handling
@@ -54,7 +58,15 @@ export const useSaveActions = () => {
             body: save,
         });
 
-        // todo show toast when successful
+        // todo extract to avoid code duplication
+        if (res.success) {
+            // todo toast
+            setSave(res.data);
+            const link = `${window.location.origin}/${res.data.id}`;
+            window.history.replaceState(null, 'Clean Cloud', `/${res.data.id}`);
+            window.navigator.clipboard.writeText(link);
+        }
+
         // todo error handling
         console.error(res);
     };
