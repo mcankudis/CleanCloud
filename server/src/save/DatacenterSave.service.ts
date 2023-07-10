@@ -4,7 +4,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { randomUUID } from 'crypto';
 import { Model } from 'mongoose';
 
-import { EstimateService } from 'src/estimate/Estimate.service';
+import { EstimateService } from '../estimate/Estimate.service';
 import { DatadogLogger } from '../logging/DatadogLogger';
 import {
     DatacenterSave,

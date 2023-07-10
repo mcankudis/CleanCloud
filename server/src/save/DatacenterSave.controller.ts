@@ -8,11 +8,11 @@ import {
     Patch,
     Post,
 } from '@nestjs/common';
+import { DatacenterSaveFindResponse } from './DatacenterSave';
 import {
-    DatacenterSaveCreateRequest,
-    DatacenterSaveFindResponse,
-    DatacenterSaveUpdateRequest,
-} from './DatacenterSave';
+    DatacenterSaveCreateRequestDTO,
+    DatacenterSaveUpdateRequestDTO,
+} from './DatacenterSave.dto';
 import { DatacenterSaveService } from './DatacenterSave.service';
 
 @Controller('/save')
@@ -30,9 +30,8 @@ export class DatacenterSaveController {
     }
 
     @Post()
-    // todo validation
     async createDatacenterSave(
-        @Body() save: DatacenterSaveCreateRequest
+        @Body() save: DatacenterSaveCreateRequestDTO
     ): Promise<DatacenterSaveFindResponse> {
         const createdSave = await this.datacenterSaveService.createDatacenterSave(save);
 
@@ -43,9 +42,8 @@ export class DatacenterSaveController {
     }
 
     @Patch()
-    // todo validation
     async updateDatacenterSave(
-        @Body() update: DatacenterSaveUpdateRequest
+        @Body() update: DatacenterSaveUpdateRequestDTO
     ): Promise<DatacenterSaveFindResponse> {
         const updatedSave = await this.datacenterSaveService.updateDatacenterSave(update);
 
