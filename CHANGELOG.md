@@ -1,5 +1,15 @@
 
 
+## [0.7.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.6.1...0.7.0) (2023-07-10)
+
+
+### Features
+
+* add better sidebar + customisaation ([041a74f](https://github.com/TeoDevGerman/CleanCloud/commit/041a74f6a203c81244e99161009dbc48df78d824))
+* add validation to DatacenterSave requests ([73fe5f8](https://github.com/TeoDevGerman/CleanCloud/commit/73fe5f8f5046448f8d707a763c457a380c78a61a))
+* improve datacenters list ([66f4c13](https://github.com/TeoDevGerman/CleanCloud/commit/66f4c130eabaec315d8233fbf40335105848c321))
+* improve total estimate display ([10d921d](https://github.com/TeoDevGerman/CleanCloud/commit/10d921d944926d5053722c5b086d4795621bac84))
+
 ### [0.6.1](https://github.com/TeoDevGerman/CleanCloud/compare/0.6.0...0.6.1) (2023-06-30)
 
 ## [0.6.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.5.2...0.6.0) (2023-06-29)
