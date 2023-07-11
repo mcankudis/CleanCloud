@@ -7,7 +7,8 @@ import helmet from 'helmet';
 import { DatadogLogger } from './logging/DatadogLogger';
 
 const mode = process.env.NODE_ENV ?? 'development';
-const config = mode === 'production' ? {} : { cors: true };
+// const config = mode === 'production' ? {} : { cors: true };
+const config = { cors: true };
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, config);

@@ -1,3 +1,5 @@
+import { Marker as LeafletMarker } from 'leaflet';
+import { useEffect, useRef } from 'react';
 import { MdBolt } from 'react-icons/md';
 import { Marker, Popup } from 'react-leaflet';
 import { DatacenterLocation } from './DatacenterLocation';
@@ -6,7 +8,8 @@ import { useSelectedLocationsActions } from './useSelectedLocation';
 
 const ennergyConsumptionPresets = [100, 250, 500, 1000];
 
-export const SelectedLocation = (props: { location: DatacenterLocation }) => {
+export const SelectedLocation = (props: { location: DatacenterLocation; isOpen: boolean }) => {
+    const markerRef = useRef<LeafletMarker>(null);
     const { location } = props;
     const { removeLocation, updateLocationConsumption } = useSelectedLocationsActions();
 
@@ -15,8 +18,15 @@ export const SelectedLocation = (props: { location: DatacenterLocation }) => {
             ? getIconForCO2Level(location.baseEstimate.data.estimatedCarbonIntensity)
             : getIconForCO2Level();
 
+    useEffect(() => {
+        if (props.isOpen && markerRef.current) {
+            markerRef.current.openPopup();
+        }
+    }, [props.isOpen]);
+
     return (
         <Marker
+            ref={markerRef}
             position={location.coordinates}
             icon={icon}
             key={location.coordinates.toString()}

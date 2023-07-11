@@ -9,6 +9,7 @@ import { DatacenterLocation } from './DatacenterLocation';
 
 export interface SelectedLocationsContext {
     locations: DatacenterLocation[];
+    openLocation?: DatacenterLocation;
 }
 
 export const SelectedLocationsContext = createContext<SelectedLocationsContext | undefined>(
@@ -17,6 +18,10 @@ export const SelectedLocationsContext = createContext<SelectedLocationsContext |
 
 export const SelectedLocationActionsContext = createContext<
     Dispatch<SetStateAction<DatacenterLocation[]>> | undefined
+>(undefined);
+
+export const OpenLocationActionsContext = createContext<
+    Dispatch<SetStateAction<DatacenterLocation | undefined>> | undefined
 >(undefined);
 
 const mapLocationsFromSaveToDatacenterLocations = async (
@@ -44,6 +49,7 @@ export const SelectedLocationContextProvider = ({ children }: { children: React.
     const { save } = useSave();
 
     const [selectedLocations, setSelectedLocations] = useState<DatacenterLocation[]>([]);
+    const [openLocation, setOpenLocation] = useState<DatacenterLocation | undefined>(undefined);
 
     const updateSelectedLocations = async (newSave: Save) => {
         try {
@@ -75,10 +81,14 @@ export const SelectedLocationContextProvider = ({ children }: { children: React.
     }, [timeframe, selectedLocations.length]);
 
     return (
-        <SelectedLocationActionsContext.Provider value={setSelectedLocations}>
-            <SelectedLocationsContext.Provider value={{ locations: selectedLocations }}>
-                {children}
-            </SelectedLocationsContext.Provider>
-        </SelectedLocationActionsContext.Provider>
+        <OpenLocationActionsContext.Provider value={setOpenLocation}>
+            <SelectedLocationActionsContext.Provider value={setSelectedLocations}>
+                <SelectedLocationsContext.Provider
+                    value={{ locations: selectedLocations, openLocation }}
+                >
+                    {children}
+                </SelectedLocationsContext.Provider>
+            </SelectedLocationActionsContext.Provider>
+        </OpenLocationActionsContext.Provider>
     );
 };

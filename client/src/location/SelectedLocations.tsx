@@ -3,7 +3,7 @@ import { SelectedLocation } from './SelectedLocation';
 import { useSelectedLocations, useSelectedLocationsActions } from './useSelectedLocation';
 
 export const SelectedLocations = () => {
-    const { locations } = useSelectedLocations();
+    const { locations, openLocation } = useSelectedLocations();
     const { addLocation } = useSelectedLocationsActions();
 
     useMapEvents({
@@ -14,8 +14,12 @@ export const SelectedLocations = () => {
 
     return (
         <>
-            {locations?.map((location) => (
-                <SelectedLocation location={location} key={location.coordinates.toString()} />
+            {locations.map((location) => (
+                <SelectedLocation
+                    location={location}
+                    key={location.coordinates.toString()}
+                    isOpen={openLocation?.coordinates.equals(location.coordinates) ?? false}
+                />
             ))}
         </>
     );

@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { fetchEstimate } from '../estimate/EstimateUtils';
 import { DatacenterLocation } from './DatacenterLocation';
 import {
+    OpenLocationActionsContext,
     SelectedLocationActionsContext,
     SelectedLocationsContext,
 } from './SelectedLocationsContext';
@@ -17,7 +18,9 @@ export const useSelectedLocations = () => {
 /** @returns Actions of the SelectedLocationsContext */
 export const useSelectedLocationsActions = () => {
     const setSelectedLocations = useContext(SelectedLocationActionsContext);
+    const setOpenLocation = useContext(OpenLocationActionsContext);
     if (!setSelectedLocations) throw new Error('Component beyond SelectedLocationsContext!');
+    if (!setOpenLocation) throw new Error('Component beyond OpenLocationContext!');
 
     const updateLocationConsumption = async (
         location: DatacenterLocation,
@@ -64,10 +67,15 @@ export const useSelectedLocationsActions = () => {
         setSelectedLocations([]);
     };
 
+    const openLocation = (location: DatacenterLocation) => {
+        setOpenLocation(location);
+    };
+
     return {
         addLocation,
         clearAllLocations,
         removeLocation,
+        openLocation,
         updateLocationConsumption,
     };
 };
