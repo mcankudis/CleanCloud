@@ -1,5 +1,12 @@
 
 
+## [0.8.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.7.0...0.8.0) (2023-07-11)
+
+
+### Features
+
+* open datacenter popup on click ([9d5c015](https://github.com/TeoDevGerman/CleanCloud/commit/9d5c015b32a00ce7d92ba6f31e77e2e643e94f22))
+
 ## [0.7.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.6.1...0.7.0) (2023-07-10)
 
 
