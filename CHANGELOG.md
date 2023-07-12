@@ -1,5 +1,12 @@
 
 
+## [0.11.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.10.0...0.11.0) (2023-07-12)
+
+
+### Features
+
+* update logo ([9c90daf](https://github.com/TeoDevGerman/CleanCloud/commit/9c90daf5332fba36fb58db8f074998d23d189771))
+
 ## [0.10.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.9.1...0.10.0) (2023-07-12)
 
 
