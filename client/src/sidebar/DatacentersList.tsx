@@ -1,7 +1,7 @@
 import { useSelectedLocations } from '../location/useSelectedLocation';
 import { DatacenterRow } from './DatacenterRow';
 export const DatacentersList = () => {
-    const { locations } = useSelectedLocations();
+    const { locations, openLocation } = useSelectedLocations();
     return (
         <div className="overflow-auto">
             <div className="font-bold">Datacenters</div>
@@ -19,7 +19,11 @@ export const DatacentersList = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-400 border-t border-gray-400">
                     {locations.map((location) => (
-                        <DatacenterRow location={location} key={location.coordinates.toString()} />
+                        <DatacenterRow
+                            location={location}
+                            key={location.coordinates.toString()}
+                            isOpen={openLocation?.coordinates.equals(location.coordinates) ?? false}
+                        />
                     ))}
                 </tbody>
             </table>

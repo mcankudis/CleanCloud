@@ -12,7 +12,7 @@ const getBaseEstimateDisplay = (location: DatacenterLocation) => {
         case 'LOADING':
             return <Loader color="#fff" />;
         case 'ERROR':
-            return 'ERROR';
+            return '';
         case 'DATA':
             return `${location.baseEstimate.data.estimatedCarbonIntensity.toFixed(2)}g`;
     }
@@ -25,13 +25,19 @@ const getZoneDisplay = (location: DatacenterLocation) => {
         case 'LOADING':
             return <Loader color="#fff" />;
         case 'ERROR':
-            return 'ERROR';
+            return '';
         case 'DATA':
             return location.baseEstimate.data.zone;
     }
 };
 
-export const DatacenterRow = ({ location }: { location: DatacenterLocation }) => {
+export const DatacenterRow = ({
+    location,
+    isOpen,
+}: {
+    location: DatacenterLocation;
+    isOpen: boolean;
+}) => {
     const { removeLocation, openLocation } = useSelectedLocationsActions();
 
     const color =
@@ -41,10 +47,13 @@ export const DatacenterRow = ({ location }: { location: DatacenterLocation }) =>
 
     return (
         <tr
-            className="hover:bg-gray-600 transition-colors duration-300 cursor-pointer"
+            className={`hover:bg-gray-600 transition-colors duration-300 cursor-pointer ${
+                isOpen ? 'bg-red-600' : ''
+            }}`}
             onClick={() => openLocation(location)}
         >
             <td className="text-center text-sm">
+                {isOpen ? '► ' : ''}
                 {getZoneDisplay(location)} ({location.coordinates.lat.toFixed(2)},{' '}
                 {location.coordinates.lng.toFixed(2)})
             </td>

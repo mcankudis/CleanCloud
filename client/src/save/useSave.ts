@@ -73,6 +73,7 @@ export const useSaveActions = () => {
         const link = `${window.location.origin}/${id}`;
         window.history.replaceState(null, 'Clean Cloud', `/${id}`);
         window.navigator.clipboard.writeText(link);
+        toast.info(`Link copied to clipboard`);
     };
 
     return {

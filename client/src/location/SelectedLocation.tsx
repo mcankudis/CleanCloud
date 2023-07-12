@@ -2,6 +2,9 @@ import { Marker as LeafletMarker } from 'leaflet';
 import { useEffect, useRef } from 'react';
 import { MdBolt } from 'react-icons/md';
 import { Marker, Popup } from 'react-leaflet';
+import { Loader } from '../components/Loader';
+import { formatCO2ForDisplay } from '../estimate/EstimateUtils';
+import { useTimeframe } from '../timeframe/useTimeframe';
 import { DatacenterLocation } from './DatacenterLocation';
 import { getIconForCO2Level } from './LocationUtils';
 import { useSelectedLocationsActions } from './useSelectedLocation';
@@ -12,6 +15,7 @@ export const SelectedLocation = (props: { location: DatacenterLocation; isOpen: 
     const markerRef = useRef<LeafletMarker>(null);
     const { location } = props;
     const { removeLocation, updateLocationConsumption } = useSelectedLocationsActions();
+    const { timeframe } = useTimeframe();
 
     const icon =
         location.baseEstimate.type === 'DATA'
@@ -31,11 +35,20 @@ export const SelectedLocation = (props: { location: DatacenterLocation; isOpen: 
             eventHandlers={{ contextmenu: () => removeLocation(location.coordinates) }}
         >
             <Popup>
-                <div>Projected energy consumption:</div>
+                <div className="text-xl">
+                    Datacenter ({location.coordinates.lat.toFixed(2)}°N,{' '}
+                    {location.coordinates.lng.toFixed(2)}°E)
+                </div>
+
+                {location.baseEstimate.type === 'DATA' && (
+                    <div className="text-lg">Zone: {location.baseEstimate.data.zone}</div>
+                )}
+
+                <div className="text-lg">Projected energy consumption:</div>
                 <div className="flex items-center mt-2">
                     <MdBolt />
                     <input
-                        className="w-full rounded p-1 mr-1 bg-slate-200"
+                        className="w-full rounded p-1 mr-1 bg-slate-500"
                         min={0}
                         onChange={(e) => updateLocationConsumption(location, +e.target.value)}
                         placeholder="Expected avg. energy usage"
@@ -48,10 +61,10 @@ export const SelectedLocation = (props: { location: DatacenterLocation; isOpen: 
                 <div className="grid grid-cols-4 mt-2 gap-1">
                     {ennergyConsumptionPresets.map((preset) => (
                         <div
-                            className={`transition-all duration-200 rounded aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-300 ${
+                            className={`transition-all duration-200 rounded aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 ${
                                 preset === location.projectedEnergyConsumptionInKWh
-                                    ? 'bg-slate-300'
-                                    : 'bg-slate-200'
+                                    ? 'bg-slate-600'
+                                    : 'bg-slate-500'
                             }`}
                             key={preset}
                             onClick={() => updateLocationConsumption(location, preset)}
@@ -61,11 +74,56 @@ export const SelectedLocation = (props: { location: DatacenterLocation; isOpen: 
                     ))}
                 </div>
 
-                <pre>{JSON.stringify(location, null, 4)}</pre>
+                {location.baseEstimate.type === 'LOADING' && <Loader color="#fff" />}
+                {location.baseEstimate.type === 'ERROR' && <div>Failed to load data</div>}
+                {location.baseEstimate.type === 'DATA' && (
+                    <div className="mt-2" style={{ fontSize: '14px' }}>
+                        <div className="text-lg">Estimates</div>
 
-                <div>
+                        <div className="flex items-center">
+                            <div>Carbon intensity:</div>
+                            <div className="ml-1 font-bold">
+                                {location.baseEstimate.data.estimatedCarbonIntensity.toFixed(2)}{' '}
+                                g/kWh
+                            </div>
+                        </div>
+
+                        <div className="flex items-center">
+                            <div>Cost per kWh:</div>
+                            <div className="ml-1 font-bold">
+                                {location.baseEstimate.data.estimatedCostPerKWh.value.toFixed(2)}{' '}
+                                {location.baseEstimate.data.estimatedCostPerKWh.currency}
+                            </div>
+                        </div>
+
+                        {!!location.computedEstimate && (
+                            <>
+                                <div className="flex items-center">
+                                    <div>
+                                        Total produced CO<sub>2</sub> in a {timeframe}:
+                                    </div>
+                                    <div className="ml-1 font-bold">
+                                        {formatCO2ForDisplay(
+                                            location.computedEstimate.producedCarbon
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center">
+                                    <div>Total energy cost in a {timeframe}:</div>
+                                    <div className="ml-1 font-bold">
+                                        {location.computedEstimate.totalCost.value.toFixed(2)}{' '}
+                                        {location.computedEstimate.totalCost.currency}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                )}
+
+                <div className="flex justify-end">
                     <button
-                        className="bg-slate-200"
+                        className="bg-red-400 mt-2"
                         onClick={(e) => {
                             e.stopPropagation();
                             removeLocation(location.coordinates);
@@ -75,44 +133,6 @@ export const SelectedLocation = (props: { location: DatacenterLocation; isOpen: 
                     </button>
                 </div>
             </Popup>
-
-            {/* {!isInputSet && (
-                <Popup>
-                    <div>
-                        <div>
-                            Enter projected energy consumption and select a time frame to see
-                            estimations
-                            <button
-                                className="bg-slate-200"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    removeLocation(location);
-                                }}
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </Popup>
-            )} */}
-
-            {/* {isInputSet && !estimate?.computed && <Popup>Loading...</Popup>}
-
-            {isInputSet && estimate?.computed && (
-                <Popup>
-                    <div>
-                        <div>Estimated for timeframe: 1 {input?.requestedTimeframe}</div>
-                        <div>
-                            Estimated total energy cost: {estimate.computed.totalCost.value}{' '}
-                            {estimate.computed.totalCost.currency}
-                        </div>
-                        <div>
-                            Estimated total C0<sub>2</sub> produced:{' '}
-                            {estimate.computed.producedCarbon}g
-                        </div>
-                    </div>
-                </Popup>
-            )} */}
         </Marker>
     );
 };

@@ -41,7 +41,7 @@ export const getEstimate = (
     };
 };
 
-const formatCO2ForDisplay = (co2: number) => {
+export const formatCO2ForDisplay = (co2: number) => {
     if (co2 < 1000) return `${co2}g`;
     if (co2 < 1000000) return `${(co2 / 1000).toFixed(2)}kg`;
     return `${(co2 / 1000000).toFixed(2)}t`;
