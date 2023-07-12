@@ -1,5 +1,12 @@
 
 
+## [0.9.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.8.0...0.9.0) (2023-07-12)
+
+
+### Features
+
+* add react-toastify ([5247caf](https://github.com/TeoDevGerman/CleanCloud/commit/5247cafcf2f8cb223e1f01237c5b0c49e8bea7de))
+
 ## [0.8.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.7.0...0.8.0) (2023-07-11)
 
 
