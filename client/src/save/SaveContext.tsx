@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, createContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { httpService } from '../HttpService';
 import { BACKEND_URL } from '../config';
 import { Save } from './Save';
@@ -23,11 +24,12 @@ export const SaveContextProvider = ({ children }: { children: React.ReactNode })
         const res = await httpService.fetch<Save>(`${BACKEND_URL}/save/${saveId}`);
 
         if (!res.success) {
-            // todo error handling
+            toast.error(`Failed to load saved locations ${res.errorMessage}`);
             return;
         }
 
         if (_isMounted.current) {
+            toast.success('Loaded saved locations');
             setSave(res.data);
         }
     };

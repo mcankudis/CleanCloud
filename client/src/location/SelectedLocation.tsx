@@ -19,9 +19,7 @@ export const SelectedLocation = (props: { location: DatacenterLocation; isOpen: 
             : getIconForCO2Level();
 
     useEffect(() => {
-        if (props.isOpen && markerRef.current) {
-            markerRef.current.openPopup();
-        }
+        if (props.isOpen && markerRef.current) markerRef.current.openPopup();
     }, [props.isOpen]);
 
     return (

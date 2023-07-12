@@ -12,11 +12,11 @@ export const Sidebar = () => {
 
     return (
         <div className="main-layout">
-            <div className="flex justify-evenly items-center">
-                <button className="bg-green-700" onClick={onSave}>
-                    Save datacenters
+            <div className="flex items-center gap-2 p-2">
+                <button className="bg-green-800" onClick={onSave}>
+                    Save
                 </button>
-                <button className="bg-red-600" onClick={clearAllLocations}>
+                <button className="bg-red-800" onClick={clearAllLocations}>
                     Clear all
                 </button>
             </div>

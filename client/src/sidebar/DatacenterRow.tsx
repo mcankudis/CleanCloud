@@ -32,7 +32,6 @@ const getZoneDisplay = (location: DatacenterLocation) => {
 };
 
 export const DatacenterRow = ({ location }: { location: DatacenterLocation }) => {
-    // todo onclick - center map on location
     const { removeLocation, openLocation } = useSelectedLocationsActions();
 
     const color =

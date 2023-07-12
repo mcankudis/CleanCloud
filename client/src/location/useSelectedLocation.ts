@@ -1,5 +1,6 @@
 import { LatLng } from 'leaflet';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { fetchEstimate } from '../estimate/EstimateUtils';
 import { DatacenterLocation } from './DatacenterLocation';
 import {
@@ -42,6 +43,8 @@ export const useSelectedLocationsActions = () => {
                 loc.coordinates.equals(updatedLocation.coordinates) ? updatedLocation : loc
             )
         );
+
+        toast.success('Updated projected energy consumption');
     };
 
     const addLocation = (latLng: LatLng) => {
@@ -54,6 +57,8 @@ export const useSelectedLocationsActions = () => {
             if (prev.some((location) => location.coordinates.equals(latLng))) return prev;
             return [...prev, newLocation];
         });
+        toast.success("Location added, don't forget to save your changes");
+        toast.info('Click on the marker or in the list to edit the projected energy consumption');
     };
 
     const removeLocation = (latLng: LatLng) => {
@@ -61,10 +66,12 @@ export const useSelectedLocationsActions = () => {
             if (!prev) return [];
             return prev.filter((location) => !location.coordinates.equals(latLng));
         });
+        toast.success("Location removed, don't forget to save your changes");
     };
 
     const clearAllLocations = () => {
         setSelectedLocations([]);
+        toast.success("All locations removed, don't forget to save your changes");
     };
 
     const openLocation = (location: DatacenterLocation) => {

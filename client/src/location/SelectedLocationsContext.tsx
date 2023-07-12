@@ -1,5 +1,6 @@
 import { LatLng } from 'leaflet';
 import { Dispatch, SetStateAction, createContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { EstimateState } from '../estimate/Estimate';
 import { getEstimate } from '../estimate/EstimateUtils';
 import { Save, SavePosition } from '../save/Save';
@@ -58,8 +59,8 @@ export const SelectedLocationContextProvider = ({ children }: { children: React.
             );
             setSelectedLocations(mappedLocations);
         } catch (error) {
-            // todo error toast + logging
-            console.error(error);
+            // todo log errors to backend or use sentry
+            toast.error('Failed to process locations');
         }
     };
 

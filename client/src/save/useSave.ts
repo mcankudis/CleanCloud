@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { HttpMethods, httpService } from '../HttpService';
 import { BACKEND_URL } from '../config';
 import { DatacenterLocation } from '../location/DatacenterLocation';
@@ -32,15 +33,14 @@ export const useSaveActions = () => {
         });
 
         if (res.success) {
-            // todo toast
+            toast.success('Save created');
             setSave(res.data);
-            const link = `${window.location.origin}/${res.data.id}`;
-            window.history.replaceState(null, 'Clean Cloud', `/${res.data.id}`);
-            window.navigator.clipboard.writeText(link);
+            linkHook(res.data.id);
+            return;
         }
 
-        // todo error handling
-        console.error(res);
+        // todo log errors to backend
+        toast.error('Error creating save');
     };
 
     const updateSave = async (saveId: string, locations: DatacenterLocation[]) => {
@@ -58,17 +58,21 @@ export const useSaveActions = () => {
             body: save,
         });
 
-        // todo extract to avoid code duplication
         if (res.success) {
-            // todo toast
+            toast.success('Save updated');
             setSave(res.data);
-            const link = `${window.location.origin}/${res.data.id}`;
-            window.history.replaceState(null, 'Clean Cloud', `/${res.data.id}`);
-            window.navigator.clipboard.writeText(link);
+            linkHook(res.data.id);
+            return;
         }
 
-        // todo error handling
-        console.error(res);
+        // todo log errors to backend
+        toast.error('Error updating save');
+    };
+
+    const linkHook = (id: string) => {
+        const link = `${window.location.origin}/${id}`;
+        window.history.replaceState(null, 'Clean Cloud', `/${id}`);
+        window.navigator.clipboard.writeText(link);
     };
 
     return {
