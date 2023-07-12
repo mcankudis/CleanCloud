@@ -1,5 +1,12 @@
 
 
+### [0.9.1](https://github.com/TeoDevGerman/CleanCloud/compare/0.9.0...0.9.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* AboutView ([2687c5f](https://github.com/TeoDevGerman/CleanCloud/commit/2687c5f65041539e6f48e706308a864ef2b61576))
+
 ## [0.9.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.8.0...0.9.0) (2023-07-12)
 
 
