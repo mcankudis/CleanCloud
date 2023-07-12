@@ -5,27 +5,30 @@ const APIURL = 'https://api.github.com/users/';
 
 async function getMembers() {
     const miko: Member = {
-        name: 'Mikolaj Cankudis',
+        name: 'Miko Cankudis',
         github: 'https://github.com/mcankudis',
-        quote: 'Tailwind CSS is awesome',
         image: await getUserAvatar('mcankudis'),
         role: 'Fullstack Developer',
     };
     const Teo: Member = {
         name: 'Teoman Widenbeck',
         github: 'https://github.com/TeoDevGerman',
-        quote: 'Tailwind CSS is realy awesome like he said!',
         image: await getUserAvatar('TeoDevGerman'),
         role: 'Frontend Developer',
     };
     const Johanna: Member = {
         name: 'Johanna Victoria Kaiser',
         github: 'https://github.com/joschjosch1',
-        quote: 'I am WIRTSCHATSINFORMATIKERIN(I dont know what to type)',
         image: await getUserAvatar('joschjosch1'),
-        role: 'Wirtschaftsinformatikerin ist alles was du wissen musst',
+        role: 'Business software developer',
     };
-    return [miko, Teo, Johanna];
+    const Luca: Member = {
+        name: 'Luca Lichterman',
+        github: 'https://github.com/L1ghtman',
+        image: await getUserAvatar('L1ghtman'),
+        role: 'Game Developer',
+    };
+    return [miko, Teo, Johanna, Luca];
 }
 
 async function getUserAvatar(username: string) {
@@ -50,7 +53,10 @@ export const AboutView = () => {
             <div className="flex justify-center">
                 <div className="row">
                     {members.map((member) => (
-                        <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 p-2 ">
+                        <div
+                            className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 p-2"
+                            key={member.name}
+                        >
                             <figure
                                 className="col  md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800 "
                                 key={member.name}
@@ -63,15 +69,8 @@ export const AboutView = () => {
                                     height="512"
                                 />
                                 <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
-                                    <blockquote>
-                                        <p className="text-lg font-medium">
-                                            {member.quote}
-                                        </p>
-                                    </blockquote>
                                     <figcaption className="font-medium">
-                                        <a href={member.github}>
-                                            {member.github}
-                                        </a>
+                                        <a href={member.github}>{member.github}</a>
                                         <div className="text-slate-700 dark:text-slate-500">
                                             {member.role}
                                         </div>
