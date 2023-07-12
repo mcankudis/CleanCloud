@@ -1,5 +1,17 @@
 
 
+## [0.10.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.9.1...0.10.0) (2023-07-12)
+
+
+### Features
+
+* improve datacenter popup styles ([3ba98ff](https://github.com/TeoDevGerman/CleanCloud/commit/3ba98ff5765b727fe1a9ba419997b3d43621841b))
+
+
+### Bug Fixes
+
+* saving breaks datacenter estimate display ([d804aa8](https://github.com/TeoDevGerman/CleanCloud/commit/d804aa8328944ff33f8b383c8bcc1439efa73dd2))
+
 ### [0.9.1](https://github.com/TeoDevGerman/CleanCloud/compare/0.9.0...0.9.1) (2023-07-12)
 
 
