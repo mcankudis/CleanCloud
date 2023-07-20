@@ -12,6 +12,6 @@ RUN npm run build
 
 COPY . .
 
-EXPOSE 8080
+FROM nginx
 
-CMD ["node", "dist/main.js"]
+COPY  ./dist ./usr/share/nginx/html
