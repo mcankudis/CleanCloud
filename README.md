@@ -12,6 +12,14 @@ $ cd server/
 $ npm i
 ```
 
+### Environment variables
+
+Copy `.env.example` to `.env` and fill in the values.
+
+```bash
+$ cp .env.example .env
+```
+
 ### Running the app
 
 ```bash
