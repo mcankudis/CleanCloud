@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2022-01-01 00:00:00,Australia,South Australia,AU-SA,116.73,168.29,68.77,68.77,Electricity Maps Estimation; opennem.org.au

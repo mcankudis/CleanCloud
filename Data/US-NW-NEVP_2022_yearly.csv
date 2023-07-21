@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2022-01-01 00:00:00,USA,Nevada Power Company,US-NW-NEVP,390.48,476.85,27.79,25.97,eia.gov; Electricity Maps Estimation
