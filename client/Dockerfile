@@ -8,6 +8,11 @@ RUN npm install
 
 COPY . .
 
+RUN echo "VITE_BACKEND_URL=$VITE_BACKEND_URL" > .env
+RUN echo "VITE_BACKEND_URL=$VITE_BACKEND_URL"
+
+COPY . .
+
 RUN npm run build
 
 COPY . .
