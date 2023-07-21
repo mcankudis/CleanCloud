@@ -7,12 +7,39 @@ import helmet from 'helmet';
 import { DatadogLogger } from './logging/DatadogLogger';
 
 const mode = process.env.NODE_ENV ?? 'development';
-// const config = mode === 'production' ? {} : { cors: true };
-const config = { cors: true };
+const config = mode === 'production' ? {} : { cors: true };
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule, config);
     app.use(helmet());
+    app.use(
+        helmet.contentSecurityPolicy({
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'"],
+                styleSrc: [
+                    "'self'",
+                    "'unsafe-inline'",
+                    'https://unpkg.com/leaflet@1.6.0/dist/leaflet.css ',
+                ],
+                imgSrc: [
+                    "'self'",
+                    'a.tile.openstreetmap.org',
+                    'b.tile.openstreetmap.org',
+                    'c.tile.openstreetmap.org',
+                ],
+                connectSrc: ["'self'", 'https://api.github.com'],
+                fontSrc: ["'self'"],
+                objectSrc: ["'none'"],
+                mediaSrc: ["'none'"],
+                frameSrc: ["'none'"],
+                workerSrc: ["'none'"],
+                childSrc: ["'none'"],
+                formAction: ["'none'"],
+                upgradeInsecureRequests: [],
+            },
+        })
+    );
 
     const logger = app.get(DatadogLogger);
     app.useLogger(logger);
