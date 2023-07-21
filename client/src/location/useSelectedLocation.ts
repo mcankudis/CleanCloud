@@ -82,7 +82,8 @@ export const useSelectedLocationsActions = () => {
     };
 
     const openLocation = (location: DatacenterLocation) => {
-        setOpenLocation(location);
+        setOpenLocation(undefined);
+        setTimeout(() => setOpenLocation(location), 0);
     };
 
     return {
