@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2022-01-01 00:00:00,USA,South Carolina Public Service Authority,US-CAR-SC,535.27,618.02,25.90,6.83,eia.gov; Electricity Maps Estimation

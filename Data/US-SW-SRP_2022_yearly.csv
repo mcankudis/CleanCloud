@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2022-01-01 00:00:00,USA,Salt River Project,US-SW-SRP,211.70,265.50,58.02,4.82,eia.gov; Electricity Maps Estimation

@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2021-01-01 00:00:00,USA,Gainesville Regional Utilities,US-FLA-GVL,600.81,712.06,2.31,0.51,eia.gov; Electricity Maps Estimation
