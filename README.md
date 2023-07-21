@@ -34,6 +34,23 @@ We use GitHub Projects to organize our work. To view the project, click [here](h
 
 ## Running and building
 
+The project requires NodeJS > 16 to run.
+
+For development, you will need to have a running MongoDB instance (either local or in cloud). Specify the connection string in the `.env` file in the `server` directory to connect to it.
+
+Alternatively, you can use Docker to run the project. You will need to have Docker installed and running on your machine. MongoDB is still needed if you want to use Docker. The client will be served by the server. Fill out the env variables berfore building the image (see below).
+
+Unless you provide the PORT environment variable, the app will run on port 3545.
+
+### Docker (server + client)
+
+In the root directory, run:
+
+```bash
+docker build --tag=<image-tag,f.e.cleancloud> .
+docker run -it -d -p 3545:3545 cleancloud
+```
+
 ### Server
 
 ```bash
@@ -91,7 +108,3 @@ $ npm run dev
 # build
 $ npm run build
 ```
-
-## Our git workflow
-
-![git_flow](https://github.com/mcankudis/CleanCloud/blob/develop/git_flow.png?raw=true)
