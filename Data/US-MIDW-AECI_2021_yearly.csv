@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2021-01-01 00:00:00,USA,"Associated Electric Cooperative, Inc.",US-MIDW-AECI,617.55,670.33,21.83,20.85,eia.gov; Electricity Maps Estimation

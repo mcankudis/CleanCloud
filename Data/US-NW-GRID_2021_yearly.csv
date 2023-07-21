@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2021-01-01 00:00:00,USA,"Gridforce Energy Management, Llc",US-NW-GRID,450.83,490.06,17.98,17.97,eia.gov

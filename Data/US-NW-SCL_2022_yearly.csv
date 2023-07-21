@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2022-01-01 00:00:00,USA,Seattle City Light,US-NW-SCL,0.00,24.00,100.00,100.00,eia.gov; Electricity Maps Estimation

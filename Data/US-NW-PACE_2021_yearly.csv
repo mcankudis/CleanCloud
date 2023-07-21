@@ -1,2 +1,0 @@
-Datetime (UTC),Country,Zone Name,Zone Id,Carbon Intensity gCO₂eq/kWh (direct),Carbon Intensity gCO₂eq/kWh (LCA),Low Carbon Percentage,Renewable Percentage,Data Source
-2021-01-01 00:00:00,USA,Pacificorp East,US-NW-PACE,592.49,639.83,31.79,31.29,eia.gov; Electricity Maps Estimation

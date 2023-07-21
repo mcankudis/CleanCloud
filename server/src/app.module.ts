@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { configuration } from './config/configuration';
 import { EstimateModule } from './estimate/Estimate.module';
 import { FlowIdMiddleware } from './logging/flow-id.middleware';
@@ -24,6 +26,14 @@ import { DatacenterSaveModule } from './save/DatacenterSave.module';
                 };
             },
             inject: [ConfigService],
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, '../..', 'client/dist'),
+            exclude: [
+                'https://a.tile.openstreetmap.org/*',
+                'https://b.tile.openstreetmap.org/*',
+                'https://c.tile.openstreetmap.org/',
+            ],
         }),
         ScheduleModule.forRoot(),
         EstimateModule,
