@@ -1,3 +1,4 @@
+import { Intro } from '../components/Intro';
 import { SelectedLocationContextProvider } from '../location/SelectedLocationsContext';
 import { SaveContextProvider } from '../save/SaveContext';
 import { Sidebar } from '../sidebar/Sidebar';
@@ -8,6 +9,8 @@ export const MapView = () => {
     return (
         <div className="grid grid-cols-5 overflow-auto">
             <SaveContextProvider>
+                <Intro />
+
                 <TimeframeContextProvider>
                     <SelectedLocationContextProvider>
                         <div className="col-1 overflow-auto">

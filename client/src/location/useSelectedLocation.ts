@@ -1,6 +1,7 @@
 import { LatLng } from 'leaflet';
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
+import { EstimateState } from '../estimate/Estimate';
 import { fetchEstimate } from '../estimate/EstimateUtils';
 import { DatacenterLocation } from './DatacenterLocation';
 import {
@@ -47,11 +48,17 @@ export const useSelectedLocationsActions = () => {
         toast.success('Updated projected energy consumption');
     };
 
-    const addLocation = (latLng: LatLng) => {
+    const addLocation = async (latLng: LatLng) => {
+        const estimate = await fetchEstimate(latLng);
+
+        const baseEstimate: EstimateState = estimate.success
+            ? { type: 'DATA', data: estimate.data }
+            : { type: 'ERROR', message: estimate.errorMessage };
+
         setSelectedLocations((prev) => {
             const newLocation: DatacenterLocation = {
                 coordinates: latLng,
-                baseEstimate: { type: 'INITIAL' },
+                baseEstimate,
             };
             if (!prev) return [newLocation];
             if (prev.some((location) => location.coordinates.equals(latLng))) return prev;
@@ -75,7 +82,8 @@ export const useSelectedLocationsActions = () => {
     };
 
     const openLocation = (location: DatacenterLocation) => {
-        setOpenLocation(location);
+        setOpenLocation(undefined);
+        setTimeout(() => setOpenLocation(location), 0);
     };
 
     return {

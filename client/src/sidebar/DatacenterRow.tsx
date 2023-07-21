@@ -53,7 +53,7 @@ export const DatacenterRow = ({
             onClick={() => openLocation(location)}
         >
             <td className="text-center text-sm">
-                {isOpen ? '► ' : ''}
+                {isOpen ? <span style={{ marginLeft: '-13px' }}>►</span> : ''}
                 {getZoneDisplay(location)} ({location.coordinates.lat.toFixed(2)},{' '}
                 {location.coordinates.lng.toFixed(2)})
             </td>
