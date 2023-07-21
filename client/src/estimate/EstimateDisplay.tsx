@@ -37,7 +37,7 @@ export const EstimateDisplay = () => {
 
     return (
         <div
-            className="absolute top-4 right-4 rounded bg-zinc-700 p-5 opacity-90"
+            className="absolute top-4 right-4 rounded bg-zinc-700 p-5 opacity-90 text-white"
             style={{ zIndex: 999 }}
         >
             <TimeframeSelect />
