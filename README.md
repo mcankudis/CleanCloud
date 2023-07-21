@@ -1,4 +1,8 @@
+![cleancloud_logo](https://github.com/mcankudis/CleanCloud/blob/develop/client/public/banner.png?raw=true)
+
 # CleanCloud
+
+Visit our app at [https://cleancloud-4le4sfhova-ew.a.run.app/](https://cleancloud-4le4sfhova-ew.a.run.app/)
 
 CleanCloud is a web application targeting companies constructing datacenters. It allows the user to find a location for their datacenter with the smallest carbon footprint. To achieve that, we use data from [ElectricityMaps](https://www.electricitymaps.com). The user can create multiple datacenters and specify their projected power consumption in order to see estimates regarding total C0<sub>2</sub> production and electricity cost. The configuration of the datacenters can be saved and shared with other users.
 
@@ -9,6 +13,8 @@ CleanCloud was created by a group of students from Berlin University of Technolo
 ![git_flow](https://github.com/mcankudis/CleanCloud/blob/develop/git_flow.png?raw=true)
 
 We use conventional commits to automatically generate changelogs and version numbers.
+
+The reason for having three permanent branches (release, main, develop) is our versioning and build flow. `Release` is protected and can only be altered by pull requests approved by a code owner, which is a standard practice, as it is automatically deployed to production. We needed the `main` branch to not be protected though, in order to run automatic versioning with a GitHub Action against it. As of writing this, GitHub Actions cannot push directly to protected branches (which is a shame, they should be able to run with the rights of the person whose action triggered the workflow). At the same time, that versioning action is why we have `develop`. Running automatic build off of `main` caused the build to trigger twice on each push, since the action's push would trigger it again.
 
 ## Infrastructure overview
 
