@@ -51,6 +51,43 @@ export const AboutView = () => {
         <div>
             <h1>About</h1>
             <div className="flex justify-center">
+                <p>
+                    <br></br>
+                    <br></br>
+                    Driven by a rapid growth of digital technologies and an increasing demand in availability, <br></br>
+                    the world of computing and network infrastructure is in the midst of a profound transformation
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    In the next decade, as existing and new businesses find themselves required to meet client demands of global <br></br>
+                    access to digital products and services, the need for efficient and sustainable solutions for  <br></br>
+                    data processing and storage will soar.
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    CleanClouds mission is to over existing industry entities and newcomers a product which helps make mindful and efficient decisions <br></br> 
+                    when choosing locations for compute- and network-infrastructure.
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    With our CleanCloud, you can easily specify locations and 
+                    immediately get information about the CO2 emissions of <br></br>
+                    electricity consumption as well as the electricity price of this
+                    region. You can also customize the size of <br></br>
+                    your data center and specify the expected power 
+                    consumption. Our platform gives you a comprehensive <br></br>
+                    overview so you can make informed decisions and build a 
+                    sustainable data center. Save money, minimize your carbon<br></br>
+                    footprint, and increase the efficiency of your business. With 
+                    Clean Cloud, you'll find the perfect location for your data <br></br>
+                    center with clean energy at its core!
+                    <br></br>
+                    <br></br>
+
+                </p>
+            </div>
+            <h1>Meet the Team</h1>
+            <div className="flex justify-center">
                 <div className="row">
                     {members.map((member) => (
                         <div
