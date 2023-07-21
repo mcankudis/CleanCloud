@@ -83,6 +83,15 @@ export const AboutView = () => {
                     center with clean energy at its core!
                     <br></br>
                     <br></br>
+                    <br></br>
+                    <br></br>
+                    CleanCloud was created by a group of students from Berlin University of Technology in the scope of a course project. <br></br>
+                    The goal was to create a 'dashboard' for accessing data related to carbon intesity of electricity production and <br></br>
+                    build a real-world use case around it. All data is taken from the electricitymaps API and energy prices are calculated <br></br>
+                    based on hand picked static data found online.
+                    <br></br>
+                    <br></br>
+                    
 
                 </p>
             </div>
