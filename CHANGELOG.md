@@ -1,5 +1,25 @@
 
 
+## [0.13.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.12.0...0.13.0) (2023-07-21)
+
+
+### Features
+
+* add intro modal ([5c190a0](https://github.com/TeoDevGerman/CleanCloud/commit/5c190a01850ef8759025eb9bb01d1f78e2a32726))
+* added about content ([bd04abe](https://github.com/TeoDevGerman/CleanCloud/commit/bd04abead6e70293de8c21c3d6994f73c3d3f037))
+* added project describtion in the about page ([8f22c3a](https://github.com/TeoDevGerman/CleanCloud/commit/8f22c3a0cebb519886618c359a696cdc018f47bd))
+* fetch base estimate when datacenter is created and not only when the user sets consumption ([a7ea38c](https://github.com/TeoDevGerman/CleanCloud/commit/a7ea38c194579e26c5da33bd5260ab97adc592e9))
+* improve about text ([26b6096](https://github.com/TeoDevGerman/CleanCloud/commit/26b6096ee81a363ccc516f7543f7a079a1fdea32))
+* move backend_url to env vars in client ([0f6d89c](https://github.com/TeoDevGerman/CleanCloud/commit/0f6d89c4ee25a8d9c308816cd7e5053144eaa22a))
+
+
+### Bug Fixes
+
+* adjust frontend to use relative api url ([cbfc591](https://github.com/TeoDevGerman/CleanCloud/commit/cbfc591f604825b94f5509eb506a901abe787fe7))
+* colors in chromium ([ea0032c](https://github.com/TeoDevGerman/CleanCloud/commit/ea0032c1dc64c4540d76508c9c7f8c188976e6e4))
+* focusing the same datacenter after clicking away on the map ([b6dd9fc](https://github.com/TeoDevGerman/CleanCloud/commit/b6dd9fc63957cc28ddffceef372a095427044c7e))
+* sidebar jumping when focusing datacenters ([0f7105e](https://github.com/TeoDevGerman/CleanCloud/commit/0f7105ed6ed50146817c34029df44e77fe3a255e))
+
 ## [0.12.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.11.7...0.12.0) (2023-07-21)
 
 
