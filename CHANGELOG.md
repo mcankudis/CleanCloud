@@ -1,5 +1,17 @@
 
 
+## [0.12.0](https://github.com/TeoDevGerman/CleanCloud/compare/0.11.7...0.12.0) (2023-07-21)
+
+
+### Features
+
+* move backend_url to env vars in client ([6baa6be](https://github.com/TeoDevGerman/CleanCloud/commit/6baa6be18190aac57e342b16c07e3452a47827b2))
+
+
+### Bug Fixes
+
+* adjust frontend to use relative api url ([a3f9a18](https://github.com/TeoDevGerman/CleanCloud/commit/a3f9a18a7d37223b128b6798f0a15dbd0579aecc))
+
 ### [0.11.7](https://github.com/TeoDevGerman/CleanCloud/compare/0.11.6...0.11.7) (2023-07-20)
 
 ### [0.11.6](https://github.com/TeoDevGerman/CleanCloud/compare/0.11.5...0.11.6) (2023-07-20)
