@@ -11,7 +11,7 @@ export const Sidebar = () => {
     const onSave = () => (save ? updateSave(save.id, locations) : createNewSave(locations));
 
     return (
-        <div className="main-layout bg-neutral-800 text-white">
+        <div className="main-layout">
             <div className="flex items-center gap-2 p-2">
                 <button className="bg-green-800" onClick={onSave}>
                     Save

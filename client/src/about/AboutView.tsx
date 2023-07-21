@@ -48,9 +48,57 @@ export const AboutView = () => {
     }, []);
 
     return (
-        <div>
-            <h1>About</h1>
-            <div className="flex justify-center">
+        <div className="container m-auto max-w-2xl">
+            <h1 className="mt-6">About</h1>
+
+            <p className="mt-1 text-justify">
+                Driven by rapid growth of digital technologies and increasing demand in
+                availability, the world of computing and network infrastructure is in the midst of a
+                profound transformation.
+            </p>
+            <p className="mt-10 text-justify">
+                In the next decade, as existing and new businesses find themselves required to meet
+                client demands of global access to digital products and services, the need for
+                efficient and sustainable solutions for data processing and storage will soar.
+            </p>
+            <p className="mt-10 text-justify">
+                CleanCloud's mission is to offer existing industry entities and newcomers a product
+                facilitating making mindful and efficient decisions when choosing locations for
+                compute- and network infrastructure.
+            </p>
+            <p className="mt-10 text-justify">
+                You can easily add locations by clicking on our map, and immediately get information
+                about the CO<sub>2</sub> emissions caused by electricity consumption, as well as the
+                average electricity price for this region. You can also customize the size of your
+                data center and specify a time frame in order to be shown total estimated energy
+                consumption and CO<sub>2</sub> emissions.
+            </p>
+            <p className="mt-10 text-justify">
+                Our platform gives you a comprehensive overview so you can make informed decisions
+                and build a sustainable data center. Save money, minimize your carbon footprint, and
+                increase the efficiency of your business.
+            </p>
+            <p className="mt-6 text-justify">
+                <b>
+                    With CleanCloud, you'll find the perfect location for your data center with
+                    clean energy at its core!
+                </b>
+            </p>
+
+            <p className="mt-6 text-justify">
+                CleanCloud was created by a group of students from Berlin University of Technology
+                as a project assignment in a course. The goal was to create a 'dashboard' for
+                accessing data related to carbon intesity of electricity production and build a
+                real-world use case around it, focusing on software engineering processes, such as
+                working in an agile way with modern technologies, Git, and DevOps. All CO
+                <sub>2</sub>-related data is sourced from{' '}
+                <a href="https://www.electricitymaps.com/">Electricitymaps</a> and energy prices are
+                calculated based on hand picked statistical data found online.
+            </p>
+
+            <h1 className="mt-10">Meet the Team</h1>
+
+            <div className="flex justify-center mb-10">
                 <div className="row">
                     {members.map((member) => (
                         <div
